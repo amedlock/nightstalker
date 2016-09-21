@@ -1,0 +1,102 @@
+[gd_scene load_steps=7 format=1]
+
+[ext_resource path="res://game/robots/robots.gd" type="Script" id=1]
+[ext_resource path="res://game/robots/robot_white.png" type="Texture" id=2]
+[ext_resource path="res://game/robots/shield.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 10 )
+
+[sub_resource type="Animation" id=2]
+
+resource/name = "movement"
+length = 1.2
+loop = true
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = { "times":FloatArray( 0, 0.3, 0.6, 0.9, 1.2 ), "transitions":FloatArray( 1, 1, 1, 1, 1 ), "update":1, "values":[ 0, 1, 2, 3, 0 ] }
+
+[sub_resource type="Animation" id=3]
+
+resource/name = "blink"
+length = 1.0
+loop = true
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:visibility/visible")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = { "times":FloatArray( 0, 0.5, 1 ), "transitions":FloatArray( 1, 1, 1 ), "update":1, "values":[ true, false, true ] }
+
+[node name="white_robot" type="Area2D"]
+
+transform/pos = Vector2( 237, 377 )
+input/pickable = true
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1.165, 0, 0, 1.55601, 0.339462, -1.08264 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 1 )
+health = 3
+explosion_color = Color( 1, 1, 1, 1 )
+points = 300
+speed = 25
+large_bullet = false
+
+[node name="image" type="Sprite" parent="."]
+
+transform/scale = Vector2( 0.9, 0.9 )
+texture = ExtResource( 2 )
+hframes = 4
+frame = 3
+region_rect = Rect2( 109, 0, 88, 18 )
+
+[node name="anim" type="AnimationPlayer" parent="image"]
+
+playback/process_mode = 1
+playback/default_blend_time = 0.0
+root/root = NodePath("..")
+anims/movement = SubResource( 2 )
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = "movement"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+transform/pos = Vector2( 0.339462, -1.08264 )
+transform/scale = Vector2( 1.165, 1.55601 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="shield" type="Sprite" parent="."]
+
+visibility/visible = false
+visibility/behind_parent = true
+transform/pos = Vector2( 0.500012, -0.233578 )
+transform/scale = Vector2( 1.5625, 1.67664 )
+texture = ExtResource( 3 )
+
+[node name="anim" type="AnimationPlayer" parent="shield"]
+
+playback/process_mode = 1
+playback/default_blend_time = 0.0
+root/root = NodePath("..")
+anims/blink = SubResource( 3 )
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = ""
+
+[connection signal="area_enter" from="." to="." method="_collision"]
+
+

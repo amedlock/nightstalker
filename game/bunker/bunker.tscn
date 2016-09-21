@@ -1,0 +1,191 @@
+[gd_scene load_steps=8 format=1]
+
+[ext_resource path="res://game/bunker/bunker_space.gd" type="Script" id=1]
+[ext_resource path="res://game/bunker/bunker.gd" type="Script" id=2]
+[ext_resource path="res://game/bunker/bunker.png" type="Texture" id=3]
+
+[sub_resource type="ConvexPolygonShape2D" id=28]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -10, 10, -10, -10, -3.33334, -10, -3.33334, 5 )
+
+[sub_resource type="ConvexPolygonShape2D" id=29]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 10, 10, -10, 10, -3.33334, 5, 3.33333, 5 )
+
+[sub_resource type="ConvexPolygonShape2D" id=30]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 10, -10, 10, 10, 3.33333, 5, 3.33333, -10 )
+
+[sub_resource type="RectangleShape2D" id=31]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 10 )
+
+[node name="bunker" type="Node2D"]
+
+transform/pos = Vector2( 288.8, 208.8 )
+transform/scale = Vector2( 0.9, 0.9 )
+z/z = 1
+__meta__ = { "_edit_lock_":true }
+
+[node name="bunker_space" type="Area2D" parent="."]
+
+editor/display_folded = true
+visibility/visible = false
+z/z = -1
+input/pickable = true
+shapes/0/shape = SubResource( 28 )
+shapes/0/transform = Matrix32( 5, 0, 0, 3.33333, 12.4445, -4.22223 )
+shapes/0/trigger = false
+shapes/1/shape = SubResource( 29 )
+shapes/1/transform = Matrix32( 5, 0, 0, 3.33333, 12.4445, -4.22223 )
+shapes/1/trigger = false
+shapes/2/shape = SubResource( 30 )
+shapes/2/transform = Matrix32( 5, 0, 0, 3.33333, 12.4445, -4.22223 )
+shapes/2/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 1 )
+__meta__ = { "_edit_group_":true, "_edit_lock_":true }
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="bunker_space"]
+
+transform/pos = Vector2( 12.4445, -4.22223 )
+transform/scale = Vector2( 5, 3.33333 )
+build_mode = 0
+polygon = Vector2Array( -10, -10, -3.33334, -10, -3.33334, 5, 3.33333, 5, 3.33333, -10, 10, -10, 10, 10, -10, 10 )
+shape_range = Vector2( 0, 2 )
+trigger = false
+
+[node name="bunkerUR" type="Area2D" parent="."]
+
+editor/display_folded = true
+transform/pos = Vector2( 38.8889, -22.2222 )
+input/pickable = true
+shapes/0/shape = SubResource( 31 )
+shapes/0/transform = Matrix32( 2.60204, 0, 0, 1.76939, -0.367931, 0.701591 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 2 )
+
+[node name="Sprite2" type="Sprite" parent="bunkerUR"]
+
+texture = ExtResource( 3 )
+region = true
+region_rect = Rect2( 51, 0, 51, 34 )
+__meta__ = { "_edit_lock_":true }
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bunkerUR"]
+
+transform/pos = Vector2( -0.367931, 0.701591 )
+transform/scale = Vector2( 2.60204, 1.76939 )
+shape = SubResource( 31 )
+trigger = false
+_update_shape_index = 0
+
+[node name="bunkerUL" type="Area2D" parent="."]
+
+editor/display_folded = true
+transform/pos = Vector2( -11.1111, -22.2222 )
+input/pickable = true
+shapes/0/shape = SubResource( 31 )
+shapes/0/transform = Matrix32( 2.60204, 0, 0, 1.76939, -0.367931, 0.701591 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 2 )
+
+[node name="Sprite2" type="Sprite" parent="bunkerUL"]
+
+texture = ExtResource( 3 )
+region = true
+region_rect = Rect2( 0, 0, 51, 34 )
+__meta__ = { "_edit_lock_":true }
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bunkerUL"]
+
+transform/pos = Vector2( -0.367931, 0.701591 )
+transform/scale = Vector2( 2.60204, 1.76939 )
+shape = SubResource( 31 )
+trigger = false
+_update_shape_index = 0
+
+[node name="bunkerLL" type="Area2D" parent="."]
+
+editor/display_folded = true
+transform/pos = Vector2( -11.1111, 11.1111 )
+input/pickable = true
+shapes/0/shape = SubResource( 31 )
+shapes/0/transform = Matrix32( 2.60204, 0, 0, 1.76939, -0.367931, 0.701591 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 2 )
+
+[node name="Sprite2" type="Sprite" parent="bunkerLL"]
+
+texture = ExtResource( 3 )
+region = true
+region_rect = Rect2( 0, 34, 51, 34 )
+__meta__ = { "_edit_lock_":true }
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bunkerLL"]
+
+transform/pos = Vector2( -0.367931, 0.701591 )
+transform/scale = Vector2( 2.60204, 1.76939 )
+shape = SubResource( 31 )
+trigger = false
+_update_shape_index = 0
+
+[node name="bunkerLR" type="Area2D" parent="."]
+
+editor/display_folded = true
+transform/pos = Vector2( 38.8889, 11.1111 )
+input/pickable = true
+shapes/0/shape = SubResource( 31 )
+shapes/0/transform = Matrix32( 2.60204, 0, 0, 1.76939, -0.367931, 0.701591 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 2 )
+
+[node name="Sprite2" type="Sprite" parent="bunkerLR"]
+
+texture = ExtResource( 3 )
+region = true
+region_rect = Rect2( 51, 34, 51, 34 )
+__meta__ = { "_edit_lock_":true }
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bunkerLR"]
+
+transform/pos = Vector2( -0.367931, 0.701591 )
+transform/scale = Vector2( 2.60204, 1.76939 )
+shape = SubResource( 31 )
+trigger = false
+_update_shape_index = 0
+
+[connection signal="area_enter" from="bunker_space" to="bunker_space" method="_hit_enter"]
+
+[connection signal="area_enter" from="bunkerUR" to="bunkerUR" method="_hit"]
+
+[connection signal="area_enter" from="bunkerUL" to="bunkerUL" method="_hit"]
+
+[connection signal="area_enter" from="bunkerLL" to="bunkerLL" method="_hit"]
+
+[connection signal="area_enter" from="bunkerLR" to="bunkerLR" method="_hit"]
+
+

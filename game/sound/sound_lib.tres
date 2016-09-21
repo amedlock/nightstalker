@@ -1,0 +1,22 @@
+[gd_resource type="SampleLibrary" load_steps=9 format=1]
+
+[ext_resource path="res://sound/BGSound.wav" type="Sample" id=1]
+[ext_resource path="res://sound/Explosion.wav" type="Sample" id=2]
+[ext_resource path="res://sound/RobotFire.wav" type="Sample" id=3]
+[ext_resource path="res://sound/bat_death.wav" type="Sample" id=4]
+[ext_resource path="res://sound/death1.wav" type="Sample" id=5]
+[ext_resource path="res://sound/fire.wav" type="Sample" id=6]
+[ext_resource path="res://sound/force_field.wav" type="Sample" id=7]
+[ext_resource path="res://sound/pickup.wav" type="Sample" id=8]
+
+[resource]
+
+samples/BGSound = { "db":-5.0, "pitch":1.0, "sample":ExtResource( 1 ) }
+samples/Explosion = { "db":0.0, "pitch":1.0, "sample":ExtResource( 2 ) }
+samples/RobotFire = { "db":0.0, "pitch":1.5, "sample":ExtResource( 3 ) }
+samples/bat_death = { "db":0.0, "pitch":1.0, "sample":ExtResource( 4 ) }
+samples/death1 = { "db":0.0, "pitch":1.0, "sample":ExtResource( 5 ) }
+samples/fire = { "db":1.0, "pitch":1.0, "sample":ExtResource( 6 ) }
+samples/force_field = { "db":3.0, "pitch":1.0, "sample":ExtResource( 7 ) }
+samples/pickup = { "db":0.0, "pitch":1.0, "sample":ExtResource( 8 ) }
+

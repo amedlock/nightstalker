@@ -1,0 +1,72 @@
+[gd_scene load_steps=5 format=1]
+
+[ext_resource path="res://game/robots/robots.gd" type="Script" id=1]
+[ext_resource path="res://game/robots/robot_grey.png" type="Texture" id=2]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 10 )
+
+[sub_resource type="Animation" id=2]
+
+resource/name = "movement"
+length = 0.6
+loop = true
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("image:frame")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = { "times":FloatArray( 0, 0.3, 0.6 ), "transitions":FloatArray( 1, 1, 1 ), "update":1, "values":[ 0, 1, 0 ] }
+
+[node name="grey_robot" type="Area2D"]
+
+transform/pos = Vector2( 317, 377 )
+input/pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1.146, 0, 0, 1.40186, 0.0679423, 0.514613 )
+shapes/0/trigger = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 1 )
+__meta__ = { "_edit_group_":true }
+health = 1
+explosion_color = Color( 0.484375, 0.482483, 0.482483, 1 )
+points = 300
+speed = 25
+large_bullet = false
+special_ammo = false
+fire_delay = 0.5
+
+[node name="image" type="Sprite" parent="."]
+
+transform/scale = Vector2( 1.1, 1.1 )
+texture = ExtResource( 2 )
+hframes = 2
+region_rect = Rect2( 109, 0, 88, 18 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+transform/pos = Vector2( 0.0679423, 0.514613 )
+transform/scale = Vector2( 1.146, 1.40186 )
+shape = SubResource( 1 )
+trigger = true
+_update_shape_index = 0
+
+[node name="anim" type="AnimationPlayer" parent="."]
+
+playback/process_mode = 1
+playback/default_blend_time = 0.0
+root/root = NodePath("..")
+anims/movement = SubResource( 2 )
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = "movement"
+
+[connection signal="area_enter" from="." to="." method="_collision"]
+
+
