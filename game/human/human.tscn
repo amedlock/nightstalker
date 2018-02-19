@@ -1,120 +1,128 @@
-[gd_scene load_steps=10 format=1]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://game/human/human.gd" type="Script" id=1]
 [ext_resource path="res://game/human/human.png" type="Texture" id=2]
-[ext_resource path="res://game/human/human_anim.xml" type="Animation" id=3]
-[ext_resource path="res://game/human/human_stun.png" type="Texture" id=4]
+[ext_resource path="res://game/human/human_anim.tres" type="Animation" id=3]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="Animation" id=1]
 
-custom_solver_bias = 0.0
-extents = Vector2( 10, 14.4217 )
-
-[sub_resource type="Animation" id=2]
-
-length = 1.0
+resource_name = "death"
+length = 0.7
 loop = true
 step = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath(".:frame")
+tracks/0/path = NodePath(".:region_rect")
 tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/imported = false
-tracks/0/keys = { "times":FloatArray( 0, 0.5, 1 ), "transitions":FloatArray( 1, 1, 1 ), "update":1, "values":[ 7, 8, 7 ] }
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ Rect2( 91, 0, 13, 24 ), Rect2( 104, 0, 14, 24 ), Rect2( 118, 0, 14, 24 ) ]
+}
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=4]
 
+resource_name = "stand"
 length = 0.5
 loop = false
 step = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath(".:frame")
+tracks/0/path = NodePath(".:region_rect")
 tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/imported = false
-tracks/0/keys = { "times":FloatArray( 0 ), "transitions":FloatArray( 1 ), "update":1, "values":[ 0 ] }
-
-[sub_resource type="Animation" id=4]
-
-length = 1.0
-loop = true
-step = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/imported = false
-tracks/0/keys = { "times":FloatArray( 0, 0.5, 1 ), "transitions":FloatArray( 1, 1, 1 ), "update":1, "values":[ 1, 2, 1 ] }
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Rect2( 0, 0, 14, 24 ) ]
+}
 
 [sub_resource type="Animation" id=5]
 
-resource/name = "stunned"
-length = 2.0
+resource_name = "stun"
+length = 0.8
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:region_rect")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.8 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Rect2( 118, 0, 13, 24 ), Rect2( 134, 0, 22, 24 ), Rect2( 155, 0, 22, 24 ) ]
+}
+
+[sub_resource type="Animation" id=6]
+
+length = 1.2
 loop = true
 step = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath(".:frame")
+tracks/0/path = NodePath(".:region_rect")
 tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/imported = false
-tracks/0/keys = { "times":FloatArray( 0, 0.7, 1.3 ), "transitions":FloatArray( 1, 1, 1 ), "update":1, "values":[ 0, 1, 2 ] }
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ Rect2( 39, 0, 13, 24 ), Rect2( 52, 0, 13, 24 ), Rect2( 65, 0, 13, 24 ), Rect2( 78, 0, 13, 24 ) ]
+}
 
-[node name="human" type="Area2D"]
+[sub_resource type="RectangleShape2D" id=3]
 
-transform/pos = Vector2( 85.0685, 62.6016 )
-input/pickable = false
-shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 0.594555, 0, 0, 0.845342, 0.175934, 0.0966871 )
-shapes/0/trigger = false
+custom_solver_bias = 0.0
+extents = Vector2( 4.52591, 12.4902 )
+
+[node name="human" type="Area2D" index="0"]
+
+input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
-script/script = ExtResource( 1 )
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 1 )
 
-[node name="image" type="Sprite" parent="."]
+[node name="image" type="Sprite" parent="." index="0"]
 
-transform/scale = Vector2( 1.1, 1.1 )
+position = Vector2( 0.555542, 0.347214 )
+z_index = 1
 texture = ExtResource( 2 )
 hframes = 9
-region_rect = Rect2( 109, 0, 88, 18 )
+frame = 2
+region_enabled = true
+region_rect = Rect2( 118, 0, 14, 24 )
+_sections_unfolded = [ "Offset", "Region", "Z Index" ]
 
-[node name="anim" type="AnimationPlayer" parent="image"]
+[node name="anim" type="AnimationPlayer" parent="image" index="0"]
 
-playback/process_mode = 1
-playback/default_blend_time = 0.0
-root/root = NodePath("..")
-anims/death = SubResource( 2 )
-anims/stand = SubResource( 3 )
-anims/walk_horizontal = ExtResource( 3 )
-anims/walk_vertical = SubResource( 4 )
-playback/active = true
-playback/speed = 2.0
-blend_times = [  ]
+root_node = NodePath("..")
 autoplay = ""
-
-[node name="stun_image" type="Sprite" parent="."]
-
-visibility/visible = false
-texture = ExtResource( 4 )
-hframes = 3
-frame = 1
-
-[node name="anim" type="AnimationPlayer" parent="stun_image"]
-
-playback/process_mode = 1
-playback/default_blend_time = 0.0
-root/root = NodePath("..")
-anims/stunned = SubResource( 5 )
-playback/active = true
-playback/speed = 1.0
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+playback_speed = 1.0
+anims/death = SubResource( 1 )
+anims/stand = SubResource( 4 )
+anims/stun = SubResource( 5 )
+anims/walk_horizontal = SubResource( 6 )
+anims/walk_vertical = ExtResource( 3 )
 blend_times = [  ]
-autoplay = ""
+_sections_unfolded = [ "Playback Options" ]
 
-[node name="CollisionShape2D 2" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D 2" type="CollisionShape2D" parent="." index="1"]
 
-transform/pos = Vector2( 0.175934, 0.0966871 )
-transform/scale = Vector2( 0.594555, 0.845342 )
-shape = SubResource( 1 )
-trigger = false
-_update_shape_index = 0
-
-[connection signal="area_enter" from="." to="." method="_hit"]
+shape = SubResource( 3 )
 
 

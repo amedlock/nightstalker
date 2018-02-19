@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=1]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://game/robots/robots.gd" type="Script" id=1]
 [ext_resource path="res://game/robots/robot_blue.png" type="Texture" id=2]
@@ -10,63 +10,61 @@ extents = Vector2( 10, 10 )
 
 [sub_resource type="Animation" id=2]
 
-resource/name = "movement"
 length = 1.2
 loop = true
 step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("image:frame")
 tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/imported = false
-tracks/0/keys = { "times":FloatArray( 0, 0.3, 0.6, 0.9 ), "transitions":FloatArray( 1, 1, 1, 1 ), "update":1, "values":[ 0, 1, 2, 3 ] }
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6, 0.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
 
 [node name="blue_robot" type="Area2D"]
 
-transform/pos = Vector2( 277, 377 )
-input/pickable = true
-shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 1.08507, 0, 0, 1.61774, 0.814526, 0.325814 )
-shapes/0/trigger = false
+input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
-script/script = ExtResource( 1 )
-__meta__ = { "_edit_group_":true }
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
 health = 1
-explosion_color = Color( 0.428009, 0.463514, 0.996094, 1 )
+explosion_color = Color( 0.506744, 0.577712, 0.960938, 1 )
 points = 300
 speed = 25
 large_bullet = false
 special_ammo = false
 fire_delay = 0.3
 
-[node name="image" type="Sprite" parent="."]
+[node name="image" type="Sprite" parent="." index="0"]
 
-transform/scale = Vector2( 0.95, 0.95 )
 texture = ExtResource( 2 )
 hframes = 4
 region_rect = Rect2( 109, 0, 88, 18 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 
-transform/pos = Vector2( 0.814526, 0.325814 )
-transform/scale = Vector2( 1.08507, 1.61774 )
 shape = SubResource( 1 )
-trigger = false
-_update_shape_index = 0
 
-[node name="anim" type="AnimationPlayer" parent="."]
+[node name="anim" type="AnimationPlayer" parent="." index="2"]
 
-playback/process_mode = 1
-playback/default_blend_time = 0.0
-root/root = NodePath("..")
-anims/movement = SubResource( 2 )
-playback/active = true
-playback/speed = 1.0
-blend_times = [  ]
+root_node = NodePath("..")
 autoplay = "movement"
-
-[connection signal="area_enter" from="." to="." method="_collision"]
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+playback_speed = 1.0
+anims/movement = SubResource( 2 )
+blend_times = [  ]
 
 

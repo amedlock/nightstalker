@@ -1,0 +1,457 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://game/maze/path_list.gd" type="Script" id=1]
+[ext_resource path="res://game/maze/waypoint.gd" type="Script" id=2]
+
+[node name="waypoints" type="Node2D" index="0"]
+
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="wp001" type="Position2D" parent="." index="0"]
+
+position = Vector2( 185, 90 )
+script = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+north = false
+east = true
+south = true
+west = false
+gun_spawn = false
+human_only = false
+
+[node name="wp002" type="Position2D" parent="." index="1"]
+
+position = Vector2( 185, 160 )
+script = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+north = true
+east = true
+south = true
+west = false
+gun_spawn = false
+human_only = false
+
+[node name="wp003" type="Position2D" parent="." index="2"]
+
+position = Vector2( 245, 160 )
+script = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+north = false
+east = true
+south = true
+west = true
+gun_spawn = false
+human_only = false
+
+[node name="wp004" type="Position2D" parent="." index="3"]
+
+position = Vector2( 340, 160 )
+script = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+north = true
+east = true
+south = false
+west = true
+gun_spawn = false
+human_only = false
+
+[node name="wp005" type="Position2D" parent="." index="4"]
+
+position = Vector2( 300, 160 )
+script = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+north = false
+east = true
+south = true
+west = true
+gun_spawn = true
+human_only = false
+
+[node name="wp006" type="Position2D" parent="." index="5"]
+
+position = Vector2( 300, 205 )
+script = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+north = true
+east = false
+south = false
+west = false
+gun_spawn = false
+human_only = true
+
+[node name="wp007" type="Position2D" parent="." index="6"]
+
+position = Vector2( 365, 160 )
+script = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+north = false
+east = false
+south = true
+west = true
+gun_spawn = false
+human_only = false
+
+[node name="wp008" type="Position2D" parent="." index="7"]
+
+position = Vector2( 365, 250 )
+script = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+north = true
+east = true
+south = false
+west = true
+gun_spawn = false
+human_only = false
+
+[node name="wp009" type="Position2D" parent="." index="8"]
+
+position = Vector2( 245, 250 )
+script = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+north = true
+east = true
+south = true
+west = false
+gun_spawn = false
+human_only = false
+
+[node name="wp010" type="Position2D" parent="." index="9"]
+
+position = Vector2( 245, 310 )
+script = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+north = true
+east = true
+south = false
+west = true
+gun_spawn = false
+human_only = false
+
+[node name="wp011" type="Position2D" parent="." index="10"]
+
+position = Vector2( 370, 310 )
+script = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+north = false
+east = false
+south = true
+west = true
+gun_spawn = false
+human_only = false
+
+[node name="wp012" type="Position2D" parent="." index="11"]
+
+position = Vector2( 370, 375 )
+script = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+north = true
+east = true
+south = false
+west = true
+gun_spawn = false
+human_only = false
+
+[node name="wp013" type="Position2D" parent="." index="12"]
+
+position = Vector2( 185, 310 )
+script = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+north = true
+east = true
+south = true
+west = false
+gun_spawn = false
+human_only = false
+
+[node name="wp014" type="Position2D" parent="." index="13"]
+
+position = Vector2( 185, 375 )
+script = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+north = true
+east = true
+south = false
+west = true
+gun_spawn = false
+human_only = false
+
+[node name="wp015" type="Position2D" parent="." index="14"]
+
+position = Vector2( 120, 375 )
+script = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+north = true
+east = true
+south = false
+west = false
+gun_spawn = false
+human_only = false
+
+[node name="wp016" type="Position2D" parent="." index="15"]
+
+position = Vector2( 185, 215 )
+script = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+north = true
+east = false
+south = true
+west = true
+gun_spawn = false
+human_only = false
+
+[node name="wp017" type="Position2D" parent="." index="16"]
+
+position = Vector2( 120, 215 )
+script = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+north = true
+east = true
+south = true
+west = false
+gun_spawn = false
+human_only = false
+
+[node name="wp018" type="Position2D" parent="." index="17"]
+
+position = Vector2( 120, 110 )
+script = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+north = false
+east = false
+south = true
+west = true
+gun_spawn = false
+human_only = false
+
+[node name="wp019" type="Position2D" parent="." index="18"]
+
+position = Vector2( 55, 110 )
+script = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+north = false
+east = true
+south = true
+west = false
+gun_spawn = false
+human_only = false
+
+[node name="wp020" type="Position2D" parent="." index="19"]
+
+position = Vector2( 55, 310 )
+script = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+north = true
+east = true
+south = false
+west = false
+gun_spawn = false
+human_only = false
+
+[node name="wp021" type="Position2D" parent="." index="20"]
+
+position = Vector2( 120, 310 )
+script = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+north = true
+east = false
+south = true
+west = true
+gun_spawn = true
+human_only = false
+
+[node name="wp022" type="Position2D" parent="." index="21"]
+
+position = Vector2( 340, 90 )
+script = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+north = false
+east = true
+south = true
+west = true
+gun_spawn = false
+human_only = false
+
+[node name="wp023" type="Position2D" parent="." index="22"]
+
+position = Vector2( 430, 90 )
+script = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+north = false
+east = true
+south = true
+west = true
+gun_spawn = false
+human_only = false
+
+[node name="wp024" type="Position2D" parent="." index="23"]
+
+position = Vector2( 430, 215 )
+script = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+north = true
+east = true
+south = true
+west = false
+gun_spawn = false
+human_only = false
+
+[node name="wp025" type="Position2D" parent="." index="24"]
+
+position = Vector2( 555, 215 )
+script = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+north = true
+east = true
+south = false
+west = true
+gun_spawn = false
+human_only = false
+
+[node name="wp026" type="Position2D" parent="." index="25"]
+
+position = Vector2( 555, 160 )
+script = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+north = false
+east = true
+south = true
+west = true
+gun_spawn = true
+human_only = false
+
+[node name="wp027" type="Position2D" parent="." index="26"]
+
+position = Vector2( 585, 160 )
+script = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+north = true
+east = false
+south = false
+west = true
+gun_spawn = false
+human_only = false
+
+[node name="wp028" type="Position2D" parent="." index="27"]
+
+position = Vector2( 585, 90 )
+script = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+north = false
+east = false
+south = true
+west = true
+gun_spawn = false
+human_only = false
+
+[node name="wp029" type="Position2D" parent="." index="28"]
+
+position = Vector2( 490, 160 )
+script = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+north = true
+east = true
+south = false
+west = false
+gun_spawn = false
+human_only = false
+
+[node name="wp030" type="Position2D" parent="." index="29"]
+
+position = Vector2( 490, 90 )
+script = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+north = false
+east = true
+south = true
+west = true
+gun_spawn = false
+human_only = false
+
+[node name="wp031" type="Position2D" parent="." index="30"]
+
+position = Vector2( 585, 215 )
+script = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+north = false
+east = false
+south = true
+west = true
+gun_spawn = false
+human_only = false
+
+[node name="wp032" type="Position2D" parent="." index="31"]
+
+position = Vector2( 585, 280 )
+script = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+north = true
+east = false
+south = true
+west = true
+gun_spawn = false
+human_only = false
+
+[node name="wp033" type="Position2D" parent="." index="32"]
+
+position = Vector2( 585, 375 )
+script = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+north = true
+east = false
+south = false
+west = true
+gun_spawn = true
+human_only = false
+
+[node name="wp034" type="Position2D" parent="." index="33"]
+
+position = Vector2( 490, 280 )
+script = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+north = false
+east = true
+south = true
+west = false
+gun_spawn = false
+human_only = false
+
+[node name="wp035" type="Position2D" parent="." index="34"]
+
+position = Vector2( 490, 310 )
+script = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+north = true
+east = false
+south = false
+west = true
+gun_spawn = false
+human_only = false
+
+[node name="wp036" type="Position2D" parent="." index="35"]
+
+position = Vector2( 430, 310 )
+script = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+north = true
+east = true
+south = true
+west = false
+gun_spawn = false
+human_only = false
+
+[node name="wp037" type="Position2D" parent="." index="36"]
+
+position = Vector2( 430, 375 )
+script = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+north = true
+east = true
+south = false
+west = true
+gun_spawn = false
+human_only = false
+
+

@@ -6,27 +6,27 @@ export var speed = 30
 
 var points = 300
 var anim
-var game
 
 
 var index = 0
 
+var maze
 var waypoints
 var last_wp = null
 var next_wp = null
 
 
 func _ready():	
-	waypoints = get_tree().get_root().get_node("Game/waypoints")
+	maze = get_parent()
+	waypoints = maze.get_node("waypoints")
 	anim = self.get_node("anim")
-	game = get_tree().get_root().get_node("Game")
 	self.add_to_group("enemies")
 	self.set_process(true)
 
 
 func _process(delta):
 	if last_wp==null:
-		last_wp = waypoints.find_closest( self.get_pos() )
+		last_wp = waypoints.find_closest( self.position )
 	if next_wp==null:
 		choose_path()
 	else:
@@ -35,43 +35,42 @@ func _process(delta):
 		
 		
 func follow_path(delta):
-	if false==move_towards( next_wp.get_pos(), delta ):
-		#print("Arrived at:", str(next_wp.get_pos()))
-		set_pos( next_wp.get_pos() ) # we are there
+	if false==move_towards( next_wp.position, delta ):
+		position=( next_wp.position ) # we are there
 		last_wp = next_wp
 		choose_path()
 	
 
 func choose_path():
 	next_wp = last_wp.choose_random()
-	#print("From path :", str( last_wp.get_pos() ) )
-	#print("Next path :", str( next_wp.get_pos() ) )
+
 
 
 # moves this towards a point, returns true if still moving
 func move_towards( pt, delta ):
-	var pos = get_pos()
+	var pos = position
 	var dist = pos.distance_to(pt)
 	if dist < 0.75:
 		return false
 	var vel = ( pt - pos ).normalized() * delta * speed
-	set_pos( pos + vel )
+	position = ( pos + vel )
 	return true
 		
 			
 func kill():
-	game.audio.play("bat_death")
+	maze.audio.stream = load("res://sound/bat_death.wav")
+	maze.audio.play()
 	var n = expl.instance()
-	n.set_pos( self.get_pos() + Vector2(0,1) )
-	n.connect("exit_tree", game, "spawn_bat", [index] )
+	n.translate( Vector2(0,1) )
+	n.connect("tree_exited", maze, "spawn_bat", [index] )
 	self.get_parent().add_child( n )	
 	self.queue_free()
 	
 	
-func _collide( other ):
+func _hit( other ):
 	if other.is_in_group("bullets"):
 		if other.source == "player":
-			game.add_points(300)
+			maze.add_points(300)
 		self.kill()
 	if other.is_in_group("player"):
 		other.stun()

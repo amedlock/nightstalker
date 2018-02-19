@@ -1,0 +1,108 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://game/maze/walls.gd" type="Script" id=1]
+[ext_resource path="res://game/maze/walls.png" type="Texture" id=2]
+
+[node name="walls" type="Area2D" index="0"]
+
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="wall_sprite" type="Sprite" parent="." index="0"]
+
+texture = ExtResource( 2 )
+centered = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." index="1"]
+
+position = Vector2( 321.97, 244.05 )
+build_mode = 1
+polygon = PoolVector2Array( -245, -105, -245, 50, -215, 50, -215, -105 )
+
+[node name="CollisionPolygon2D1" type="CollisionPolygon2D" parent="." index="2"]
+
+position = Vector2( 323.545, 231.579 )
+build_mode = 1
+polygon = PoolVector2Array( -300, 165, 290, 165, 290, 205, -300, 205 )
+
+[node name="CollisionPolygon2D 2" type="CollisionPolygon2D" parent="." index="3"]
+
+build_mode = 1
+polygon = PoolVector2Array( 140, 195, 165, 195, 165, 65, 605, 65, 605, 45, 25, 45, 25, 70, 140, 70, 140, 135 )
+
+[node name="CollisionPolygon2D 3" type="CollisionPolygon2D" parent="." index="4"]
+
+build_mode = 0
+polygon = PoolVector2Array( 200, 175, 200, 290, 225, 290, 225, 175 )
+
+[node name="CollisionPolygon2D 4" type="CollisionPolygon2D" parent="." index="5"]
+
+position = Vector2( 30.9512, 117.289 )
+build_mode = 0
+polygon = PoolVector2Array( 112, 120, 121.057, 117.5, 132, 120, 132.766, 232.989, 124.621, 232.989, 112.403, 232.174 )
+
+[node name="CollisionPolygon2D 5" type="CollisionPolygon2D" parent="." index="6"]
+
+position = Vector2( -1.10803, 2.21606 )
+build_mode = 0
+polygon = PoolVector2Array( 25.6815, 71.3499, 27.0083, 324.113, 102.638, 326.103, 102.638, 346.669, 25.6815, 346.669, 25.018, 395.762, 3.12518, 395.762, 2.46176, 70.6865 )
+
+[node name="CollisionPolygon2D 6" type="CollisionPolygon2D" parent="." index="7"]
+
+build_mode = 0
+polygon = PoolVector2Array( 610, 60, 610, 175, 570, 175, 570, 200, 610, 200, 610, 405, 635, 405, 635, 60 )
+
+[node name="CollisionPolygon2D 7" type="CollisionPolygon2D" parent="." index="8"]
+
+build_mode = 0
+polygon = PoolVector2Array( 205, 330, 215, 325, 350, 325, 350, 355, 205, 355 )
+
+[node name="CollisionPolygon2D 8" type="CollisionPolygon2D" parent="." index="9"]
+
+build_mode = 0
+polygon = PoolVector2Array( 265, 265, 410, 265, 410, 355, 385, 355, 385, 290, 265, 290 )
+
+[node name="CollisionPolygon2D 9" type="CollisionPolygon2D" parent="." index="10"]
+
+build_mode = 0
+polygon = PoolVector2Array( 355, 110, 410, 110, 410, 230, 385, 230, 385, 135, 355, 135 )
+
+[node name="CollisionPolygon2D 10" type="CollisionPolygon2D" parent="." index="11"]
+
+build_mode = 0
+polygon = PoolVector2Array( 200, 115, 320, 115, 320, 140, 200, 140 )
+
+[node name="CollisionPolygon2D 11" type="CollisionPolygon2D" parent="." index="12"]
+
+build_mode = 0
+polygon = PoolVector2Array( 510, 110, 510, 140, 565, 140, 565, 110 )
+
+[node name="CollisionPolygon2D 12" type="CollisionPolygon2D" parent="." index="13"]
+
+build_mode = 0
+polygon = PoolVector2Array( 445, 110, 475, 110, 475, 175, 535, 175, 535, 200, 445, 200 )
+
+[node name="CollisionPolygon2D 13" type="CollisionPolygon2D" parent="." index="14"]
+
+build_mode = 0
+polygon = PoolVector2Array( 445, 235, 450, 295, 470, 295, 475, 260, 565, 260, 565, 235 )
+
+[node name="CollisionPolygon2D 14" type="CollisionPolygon2D" parent="." index="15"]
+
+build_mode = 0
+polygon = PoolVector2Array( 445, 325, 450, 355, 565, 350, 560, 305, 515, 300, 505, 325 )
+
+

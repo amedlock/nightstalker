@@ -25,7 +25,8 @@ var fire_timer = 0
 var shield_time = 0
 var shield_anim ;
 
-var game;
+var maze;
+var game
 var audio
 var waypoints 
 
@@ -34,17 +35,19 @@ var next_wp # next one to move to, these two vars can switch if we change direct
 
 
 func _ready():
+	maze = get_parent()
+	audio = maze.get_node("audio")
 	self.add_to_group("enemies")
 	if large_bullet:
 		bullet = load("res://game/bullet/bullet2.tscn")
 	else:
 		bullet = load("res://game/bullet/bullet.tscn")
 	game = get_tree().get_root().get_node("Game")
-	audio = game.get_node("audio")
-	waypoints = get_tree().get_root().get_node("Game/waypoints")
+	audio = maze.get_node("audio")
+	waypoints = maze.get_node("waypoints")
 	if self.has_node("shield"):
 		shield_anim = self.get_node("shield/anim")
-	set_process(true)	
+
 
 
 func _process(delta):
@@ -61,33 +64,30 @@ func _process(delta):
 
 func move_to_initial(delta):
 	if false==move_towards( Vector2(120,375), delta ):
-		last_wp = waypoints.find_closest(get_pos())
+		last_wp = waypoints.find_closest(position)
 		choose_path()
 
 		
 # moves this towards a point, returns true if still moving
 func move_towards( pt, delta ):
-	var pos = get_pos()
+	var pos = position
 	var dist = pos.distance_to(pt)
 	if dist < 0.75:
 		return false
 	var vel = ( pt - pos ).normalized() * delta * speed
-	set_pos( pos + vel )
+	position= ( pos + vel )
 	return true
 	
 		
 func follow_path(delta):
-	if false==move_towards( next_wp.get_pos(), delta ):
-		#print("Arrived at:", str(next_wp.get_pos()))
-		set_pos( next_wp.get_pos() ) # we are there
+	if false==move_towards( next_wp.position, delta ):
+		position = ( next_wp.position ) # we are there
 		last_wp = next_wp
 		choose_path()
 	
 
 func choose_path():
 	next_wp = last_wp.choose_random()
-	#print("From path :", str( last_wp.get_pos() ) )
-	#print("Next path :", str( next_wp.get_pos() ) )
 
 
 
@@ -100,7 +100,7 @@ func update_shield(delta):
 			shield_anim.get_parent().hide()
 
 
-func _collision( other ):
+func _hit( other ):
 	if dead: return 
 	if other.is_in_group("bullets") and other.source!="robot":
 		self.health -= 1
@@ -111,45 +111,48 @@ func _collision( other ):
 			if self.shield_anim!=null:
 				self.shield_time = 2
 				self.shield_anim.play("blink")
-				audio.play("force_field")
+				audio.stream = load("res://sound/force_field.wav")
+				audio.play()
 
 
 
 func destroy():
-	audio.bg_playing = false
-	audio.play("Explosion")
+	audio.stop()
+	audio.stream = load("res://sound/Explosion.wav")
+	audio.play()
 	self.dead = true
-	game.add_points( points )
+	maze.add_points( points )
 	var ex = explosion.instance()
-	ex.set_pos( self.get_pos() )
+	ex.get_node("anim").playback_speed = 1.7
+	ex.position =  self.position
 	self.get_parent().add_child( ex )
 	ex.get_node("gear1").set_modulate( explosion_color )
 	ex.get_node("gear2").set_modulate( explosion_color )
 	var anim = ex.get_node("anim")
 	anim.play("explosion")
-	anim.connect("finished", self , "_finish", [ex] )
+	anim.connect("animation_finished", self , "_finish", [ex] )
 	self.hide()
 
-func _finish(ex):
+func _finish(anim_name, ex):
 	ex.queue_free()
-	audio.bg_playing = true
+	audio.stop()
 	if is_secondary:
-		game.spawn_secondary()
+		maze.spawn_secondary()
 	else:
-		game.spawn_robot()
+		maze.spawn_robot()
 	self.queue_free()
 
 
 func fire_at_player(delta):
-	if game.is_over:
+	if not maze.player:
 		return
 	if fire_timer>0:
 		fire_timer =max( fire_timer- delta, 0)		
-	var player = game.player
-	if player==null or player.is_dead:
+	var player = maze.player
+	if player==null:
 		return
-	var pos = get_pos()
-	var p2 = player.get_pos()
+	var pos = position
+	var p2 = player.position
 	if abs(p2.y-pos.y) < 20:
 		if p2.x > pos.x:
 			fire( 1, 0 )
@@ -168,12 +171,14 @@ func fire( xd, yd ):
 		b.special = self.special_ammo
 		b.source="robot"
 		b.dir = Vector2( xd, yd )
-		b.set_pos( self.get_pos() )
+		b.position =  self.position
 		self.get_parent().add_child(b)
 		self.ready_to_fire = false
-		audio.play("fire")
-		b.connect("exit_tree", self, "clear_bullet" )
+		audio.stream = b.get_sound()
+		audio.play()
+		b.connect("tree_exited", self, "clear_bullet" )
 
 func clear_bullet():
 	self.ready_to_fire = true
+		
 		

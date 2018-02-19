@@ -2,7 +2,7 @@
 extends Area2D
 
 func _ready():
-	pass
+	self.add_to_group("walls")
 
 
 func _collide( other ):

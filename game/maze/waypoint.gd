@@ -52,7 +52,7 @@ func between( pt, p1, p2, acc ):
 func find_closest(v):
 	for wp in links:
 		if wp!=null:
-			var d = v.distance_to( wp.get_pos() )
+			var d = v.distance_to( wp.position )
 			if d < close_distance:
 				return wp
 	return self

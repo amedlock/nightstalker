@@ -12,11 +12,10 @@ var safe_rect = Rect2( 399, 217, 42, 87 )
 
 func _hit_enter(other):
 	if other.is_in_group("player"):
-		var pos = other.get_pos()
-		if not safe_rect.has_point( pos ):
+		if not safe_rect.has_point( other.position ):
 			other.backup()
 
 func _hit_exit(other):
 	if other.is_in_group("player"):
 		other.blocked = false
-		print("Free")
+

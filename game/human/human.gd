@@ -1,15 +1,18 @@
 extends Area2D
 
+var bullets = 0;
+var lives ;
+
+var gun = preload("res://game/gun/gun.tscn")
 var bullet = preload("res://game/bullet/bullet.tscn" )
 
 var ready_to_fire = true
 var speed = 70
 
+const Start_Position = Vector2(300,205)
+
 var anim  		# user animation
 var image1 		# normal image
-
-var stun_anim   # stun animation
-var image2      # stun image
 
 var game ;  	# reference to game root node
 var audio
@@ -33,31 +36,28 @@ var last_vel
 var blocked = false
 
 var user_move    # which way is the user attempting to move
+var maze 
 
-var wp_info      # debugging label
-
-
-
+var gun_spawns = []
 
 func _ready():
-	game = get_node("/root/Game")
-	audio = game.get_node("audio")
-	wp_info = game.get_node("GUI/wp_info")
-	waypoints = game.get_node("waypoints")
+	maze = get_parent()
+	for wp in maze.get_node("waypoints").get_children():
+		if wp.gun_spawn:
+			gun_spawns.append( wp.position )	
+	game = maze.get_parent()
+	audio = maze.get_node("audio")
+	waypoints = maze.get_node("waypoints")
 	self.add_to_group("player")
 	image1 = find_node("image")	
 	anim = image1.get_node("anim")
 	anim.play("stand")
-	image2 = find_node('stun_image')	
-	stun_anim = image2.get_node("anim")
-	self.set_process_input(true)
-	self.set_process(true)
 
 
 # move the player, manage animations
 func _process(delta):
 	if cur_wp==null: # no waypoint? snap to one
-		set_waypoint( waypoints.find_closest( self.get_pos() ) )
+		set_waypoint( waypoints.find_closest( position ) )
 		return
 	if is_stunned:
 		self.stun_process( delta )
@@ -67,16 +67,32 @@ func _process(delta):
 		if user_move=="": return
 		set_anim()
 		if blocked==true and last_pos!=null:
-			set_pos( last_pos )
-		last_pos = get_pos()
+			position =  last_pos 
+		last_pos = position
 		var vel = check_dir()  * delta * speed
 		last_vel = vel
-		var np = get_pos() + vel 
-		set_pos( np )
+		translate( vel )
 		return		
 
 func backup():
-	set_pos( get_pos() - last_vel )
+	translate( -last_vel )
+
+
+func reset():
+	self.bullets = 0
+	self.position = Start_Position
+	spawn_gun()
+
+
+func spawn_gun():
+	if bullets>0 or maze.has_node("gun"):
+		return 
+	var n = randi() % gun_spawns.size()
+	var v = gun_spawns[n]
+	var g = gun.instance()
+	g.position =  v 
+	maze.add_child(g)
+	return g
 
 # check player movement and firing
 func _input(event):
@@ -84,7 +100,7 @@ func _input(event):
 		user_move = ""
 		return
 	user_move = check_movement(event)
-	if event.type==InputEvent.KEY:
+	if event is InputEventKey:
 		if event.pressed:
 			if event.scancode==KEY_KP_4:
 				self.fire( -1, 0 )
@@ -98,7 +114,7 @@ func _input(event):
 
 # sets waypoint and pos to closest
 func set_waypoint(wp):
-	self.set_pos( wp.get_pos() )
+	self.position =  wp.position
 	cur_wp = wp
 	path = null	
 
@@ -158,29 +174,27 @@ func check_movement( event ):
 
 
 func fire( xd, yd ):
-	if game.bullets > 0 and ready_to_fire:
-		game.bullets -= 1
+	if bullets > 0 and ready_to_fire:
+		bullets -= 1
 		var b = bullet.instance()
 		b.special = true
 		b.source="player"
 		b.dir = Vector2( xd, yd )
-		b.set_pos( self.get_pos() )
-		self.get_parent().add_child(b)
+		b.position = ( self.position )
+		maze.add_child(b)
 		self.ready_to_fire = false
-		b.connect("exit_tree", self, "clear_bullet" )
-		audio.play("fire")
+		b.connect("tree_exited", self, "clear_bullet" )
+		audio.stream = load("res://sound/fire.wav")
+		audio.play()
 
 
 func clear_bullet():
 	self.ready_to_fire = true
-	if game.bullets<1: game.spawn_gun()
+	if bullets<1: spawn_gun()
 	
 func stun():
 	if is_dead: return
-	image1.hide()
-	anim.stop()
-	image2.show()
-	stun_anim.play("stunned")
+	anim.play("stun")
 	delay = 3
 	is_stunned = true
 
@@ -188,17 +202,16 @@ func stun_process(delta):
 	delay -= delta
 	if delay <=0:
 		is_stunned = false
-		image2.hide()
-		stun_anim.stop()
 		image1.show()
 		anim.play("stand")
 	
 func kill():
 	anim.play("death")
-	audio.play("death1")
+	audio.stream = load("res://sound/death1.wav")
+	audio.play()
 	is_dead = true
 	delay = 3
-	game.bullets = 0 
+	bullets = 0 
 		
 func dead_process(delta):
 	delay -= delta

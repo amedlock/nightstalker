@@ -3,11 +3,13 @@ extends Area2D
 var blink_delay = 0.5
 var blink_count = 0
 
-var game
+var maze
+var player
 
 func _ready():
-	game = get_tree().get_root().get_node("Game")
-	self.set_process(true)
+	maze = get_parent()
+	player = maze.get_node("Player")
+	connect("area_entered", self, "_collide" )
 	
 func _process(delta):	
 	blink_count += delta
@@ -22,5 +24,5 @@ func _process(delta):
 func _collide( area ):
 	if area.is_in_group("player") and not (area.is_dead or area.is_stunned):
 		self.queue_free()
-		game.bullets += 6
-		game.audio.play("pickup")
+		player.bullets += 6
+		#maze.pickup audio

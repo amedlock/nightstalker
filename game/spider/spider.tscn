@@ -59,6 +59,6 @@ shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
 
-[connection signal="area_enter" from="." to="." method="_collide"]
+
 
 

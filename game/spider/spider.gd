@@ -12,6 +12,7 @@ var next_wp = null
 
 
 func _ready():
+	connect("area_entered", self, "_collide" )
 	game = get_tree().get_root().get_node("Game")
 	sprite = get_node("image")
 	waypoints = game.get_node("waypoints")
@@ -20,7 +21,7 @@ func _ready():
 	
 func _process(delta):
 	if last_wp==null:
-		last_wp = waypoints.find_closest( self.get_pos() )
+		last_wp = waypoints.find_closest( self.position )
 	elif next_wp==null:
 		choose_path()
 	else:
@@ -30,12 +31,12 @@ const deg90 = deg2rad(90)
 
 # moves this towards a point, returns true if still moving
 func move_towards( pt, delta ):
-	var pos = get_pos()
+	var pos = position
 	var dist = pos.distance_to(pt)
 	if dist < 0.75:
 		return false
 	var vel = ( pt - pos ).normalized() * delta * speed
-	set_pos( pos + vel )
+	position = ( pos + vel )
 	sprite.set_flip_v( vel.y > 0 )
 	if pt.x>pos.x:
 		sprite.set_rot( -deg90 )
@@ -47,17 +48,18 @@ func move_towards( pt, delta ):
 	
 		
 func follow_path(delta):
-	if false==move_towards( next_wp.get_pos(), delta ):
-		#print("Arrived at:", str(next_wp.get_pos()))
-		set_pos( next_wp.get_pos() ) # we are there
+	if false==move_towards( next_wp.position, delta ):
+		position =  next_wp.position  # we are there
 		last_wp = next_wp
 		choose_path()
 	
 
+func _hit(other):
+	self.queue_free()
+
 func choose_path():
 	next_wp = last_wp.choose_random()
-	#print("From path :", str( last_wp.get_pos() ) )
-	#print("Next path :", str( next_wp.get_pos() ) )
+
 	
 	
 func _collide(other):
@@ -70,7 +72,7 @@ func _collide(other):
 		
 func kill():
 	var n = expl.instance()
-	n.set_pos( self.get_pos() + Vector2(0,1) )
+	n.position = ( position + Vector2(0,1) )
 	n.connect("exit_tree", game, "spawn_spider" )
 	self.get_parent().add_child( n )
 	self.queue_free()

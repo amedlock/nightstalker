@@ -10,7 +10,7 @@ extents = Vector2( 10, 10 )
 
 [sub_resource type="Animation" id=2]
 
-length = 1.5
+length = 1.2
 loop = true
 step = 0.1
 tracks/0/type = "value"
@@ -20,13 +20,13 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.4, 0.8, 1.2 ),
+"times": PoolRealArray( 0, 0.3, 0.6, 0.9 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2, 3 ]
 }
 
-[node name="bat1" type="Area2D" index="0"]
+[node name="bat1" type="Area2D"]
 
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -36,13 +36,14 @@ angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
 script = ExtResource( 1 )
+_sections_unfolded = [ "Collision" ]
 speed = 30
 
 [node name="image" type="Sprite" parent="." index="0"]
 
 texture = ExtResource( 2 )
 hframes = 4
-frame = 3
+frame = 2
 region_rect = Rect2( 109, 0, 88, 18 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]

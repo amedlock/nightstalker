@@ -1,6 +1,7 @@
 extends Area2D
 
 
+
 export var dir = Vector2(-1,0)
 export var speed = 2.2;
 export var special = false
@@ -10,20 +11,28 @@ export var absorbs_bullets = false
 
 func _ready():
 	self.add_to_group("bullets")
-	self.set_process(true)
+	self.connect("area_entered", self, "_collide")
 		
 func _process(delta):
-	self.set_pos( self.get_pos() + (dir * self.speed ) )
-	var p = get_pos()
+	self.translate( dir * self.speed )
+	var p = position
 	var sz = get_viewport_rect().size
-	if p.x < 1 or p.x > sz.width or p.y < 1 or p.y > sz.height:
+	if p.x < 1 or p.x > sz.x or p.y < 1 or p.y > sz.y:
 		self.queue_free()
+
+
+func get_sound():
+	if self.absorbs_bullets:
+		return load("res://sound/RobotFire.wav")
+	else:
+		return load('res://sound/fire.wav')
 
 
 func _collide(other):
-	if absorbs_bullets and other.is_in_group("bullets"):
-		other.queue_free()
-	if other.is_in_group("player") and source!="player":
-		other.kill()
+	if other.is_in_group("walls"):
 		self.queue_free()
+	elif absorbs_bullets and other.is_in_group("bullets"):
+		other.queue_free()
+	else:
+		other._hit( self )
 

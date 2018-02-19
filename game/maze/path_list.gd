@@ -8,13 +8,13 @@ func _ready():
 	var sz = self.get_children().size()
 	for i in range(sz):
 		var ch = get_child(i)
-		var p1 = ch.get_pos()
+		var p1 = ch.position
 		var N = null
 		var E = null
 		for j in range(sz):
 			if i==j: continue # same node
 			var ch2 = get_child(j)
-			var p2 = ch2.get_pos()
+			var p2 = ch2.position
 			if p2.x==p1.x and ch.north==true:
 				if p2.y < p1.y and ch2.south==true:
 					N = closest( ch, N, ch2 )
@@ -33,7 +33,7 @@ func find_closest( v ):
 	var cur
 	var dist
 	for ch in self.get_children():
-		var d2 = ch.get_pos().distance_to(v)
+		var d2 = ch.position.distance_to(v)
 		if cur==null:
 			cur = ch
 			dist = d2
@@ -46,8 +46,8 @@ func find_closest( v ):
 func closest( n, n2, n3 ):
 	if n2==null: return n3
 	if n3==null: return n2
-	var p1 = n.get_pos()
-	if n2.get_pos().distance_to( p1 ) < n3.get_pos().distance_to( p1 ):
+	var p1 = n.position
+	if n2.position.distance_to( p1 ) < n3.position.distance_to( p1 ):
 		return n2
 	else:
 		return n3
