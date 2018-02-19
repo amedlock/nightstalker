@@ -1,1102 +1,448 @@
-[gd_scene load_steps=47 format=1]
+[gd_scene load_steps=8 format=2]
 
-[ext_resource path="res://game/main.gd" type="Script" id=1]
-[ext_resource path="res://game/sound/sound_lib.tres" type="SampleLibrary" id=2]
-[ext_resource path="res://game/sound/sound.gd" type="Script" id=3]
-[ext_resource path="res://game/nstalker.fnt" type="BitmapFont" id=4]
-[ext_resource path="res://game/walls_bg.png" type="Texture" id=5]
-[ext_resource path="res://game/path_list.gd" type="Script" id=6]
-[ext_resource path="res://game/waypoint.gd" type="Script" id=7]
-[ext_resource path="res://game/walls.gd" type="Script" id=8]
-[ext_resource path="res://game/walls.png" type="Texture" id=9]
-[ext_resource path="res://game/spider/web.gd" type="Script" id=10]
-[ext_resource path="res://game/bunker/bunker_space.gd" type="Script" id=11]
-[ext_resource path="res://game/bunker/bunker.gd" type="Script" id=12]
-[ext_resource path="res://game/bunker/bunker.png" type="Texture" id=13]
-[ext_resource path="res://game/title.gd" type="Script" id=14]
-[ext_resource path="res://game/title.png" type="Texture" id=15]
+[ext_resource path="res://game/nstalker.fnt" type="BitmapFont" id=1]
+[ext_resource path="res://game/walls_bg.png" type="Texture" id=2]
+[ext_resource path="res://game/walls.png" type="Texture" id=3]
+[ext_resource path="res://game/bunker/bunker.png" type="Texture" id=4]
+[ext_resource path="res://game/title.png" type="Texture" id=5]
 
-[sub_resource type="ConcavePolygonShape2D" id=1]
-
-custom_solver_bias = 0.0
-segments = Vector2Array( -245, -105, -245, 50, -245, 50, -215, 50, -215, 50, -215, -105, -215, -105, -245, -105 )
-
-[sub_resource type="ConcavePolygonShape2D" id=2]
-
-custom_solver_bias = 0.0
-segments = Vector2Array( -300, 165, 290, 165, 290, 165, 290, 205, 290, 205, -300, 205, -300, 205, -300, 165 )
-
-[sub_resource type="ConcavePolygonShape2D" id=3]
-
-custom_solver_bias = 0.0
-segments = Vector2Array( 140, 195, 165, 195, 165, 195, 165, 65, 165, 65, 605, 65, 605, 65, 605, 45, 605, 45, 25, 45, 25, 45, 25, 70, 25, 70, 140, 70, 140, 70, 140, 135, 140, 135, 140, 195 )
-
-[sub_resource type="ConvexPolygonShape2D" id=4]
-
-custom_solver_bias = 0.0
-points = Vector2Array( 225, 175, 225, 290, 200, 290, 200, 175 )
-
-[sub_resource type="ConvexPolygonShape2D" id=5]
-
-custom_solver_bias = 0.0
-points = Vector2Array( 112, 120, 121.057, 117.5, 132, 120, 132, 172.5, 121.437, 177.5, 112, 172.5 )
-
-[sub_resource type="ConvexPolygonShape2D" id=6]
-
-custom_solver_bias = 0.0
-points = Vector2Array( 25, 325, 105, 325, 105, 350, 25, 350 )
-
-[sub_resource type="ConvexPolygonShape2D" id=7]
-
-custom_solver_bias = 0.0
-points = Vector2Array( 25, 350, 25, 405, 10, 405, 10, 70 )
-
-[sub_resource type="ConvexPolygonShape2D" id=8]
-
-custom_solver_bias = 0.0
-points = Vector2Array( 25, 325, 25, 350, 10, 70 )
-
-[sub_resource type="ConvexPolygonShape2D" id=9]
-
-custom_solver_bias = 0.0
-points = Vector2Array( 25, 70, 25, 325, 10, 70 )
-
-[sub_resource type="ConvexPolygonShape2D" id=10]
-
-custom_solver_bias = 0.0
-points = Vector2Array( 610, 60, 635, 60, 635, 405, 610, 175 )
-
-[sub_resource type="ConvexPolygonShape2D" id=11]
-
-custom_solver_bias = 0.0
-points = Vector2Array( 635, 405, 610, 405, 610, 200 )
-
-[sub_resource type="ConvexPolygonShape2D" id=12]
-
-custom_solver_bias = 0.0
-points = Vector2Array( 610, 175, 635, 405, 610, 200 )
-
-[sub_resource type="ConvexPolygonShape2D" id=13]
-
-custom_solver_bias = 0.0
-points = Vector2Array( 610, 175, 610, 200, 570, 200, 570, 175 )
-
-[sub_resource type="ConvexPolygonShape2D" id=14]
-
-custom_solver_bias = 0.0
-points = Vector2Array( 205, 330, 215, 325, 350, 325, 350, 355, 205, 355 )
-
-[sub_resource type="ConvexPolygonShape2D" id=15]
-
-custom_solver_bias = 0.0
-points = Vector2Array( 265, 290, 265, 265, 410, 265, 385, 290 )
-
-[sub_resource type="ConvexPolygonShape2D" id=16]
-
-custom_solver_bias = 0.0
-points = Vector2Array( 385, 290, 410, 265, 410, 355, 385, 355 )
-
-[sub_resource type="ConvexPolygonShape2D" id=17]
-
-custom_solver_bias = 0.0
-points = Vector2Array( 355, 135, 355, 110, 410, 110, 385, 135 )
-
-[sub_resource type="ConvexPolygonShape2D" id=18]
-
-custom_solver_bias = 0.0
-points = Vector2Array( 385, 135, 410, 110, 410, 230, 385, 230 )
-
-[sub_resource type="ConvexPolygonShape2D" id=19]
-
-custom_solver_bias = 0.0
-points = Vector2Array( 200, 115, 320, 115, 320, 140, 200, 140 )
-
-[sub_resource type="ConvexPolygonShape2D" id=20]
-
-custom_solver_bias = 0.0
-points = Vector2Array( 565, 110, 565, 140, 510, 140, 510, 110 )
-
-[sub_resource type="ConvexPolygonShape2D" id=21]
-
-custom_solver_bias = 0.0
-points = Vector2Array( 445, 200, 445, 110, 475, 110, 475, 175 )
-
-[sub_resource type="ConvexPolygonShape2D" id=22]
-
-custom_solver_bias = 0.0
-points = Vector2Array( 535, 200, 445, 200, 475, 175, 535, 175 )
-
-[sub_resource type="ConvexPolygonShape2D" id=23]
-
-custom_solver_bias = 0.0
-points = Vector2Array( 445, 235, 565, 235, 565, 260, 475, 260 )
-
-[sub_resource type="ConvexPolygonShape2D" id=24]
-
-custom_solver_bias = 0.0
-points = Vector2Array( 450, 295, 445, 235, 475, 260, 470, 295 )
-
-[sub_resource type="ConvexPolygonShape2D" id=25]
-
-custom_solver_bias = 0.0
-points = Vector2Array( 450, 355, 445, 325, 505, 325, 565, 350 )
-
-[sub_resource type="ConvexPolygonShape2D" id=26]
-
-custom_solver_bias = 0.0
-points = Vector2Array( 560, 305, 565, 350, 505, 325, 515, 300 )
-
-[sub_resource type="RectangleShape2D" id=27]
+[sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
 extents = Vector2( 10, 10 )
 
-[sub_resource type="ConvexPolygonShape2D" id=28]
-
-custom_solver_bias = 0.0
-points = Vector2Array( -10, 10, -10, -10, -3.33334, -10, -3.33334, 5 )
-
-[sub_resource type="ConvexPolygonShape2D" id=29]
-
-custom_solver_bias = 0.0
-points = Vector2Array( 10, 10, -10, 10, -3.33334, 5, 3.33333, 5 )
-
-[sub_resource type="ConvexPolygonShape2D" id=30]
-
-custom_solver_bias = 0.0
-points = Vector2Array( 10, -10, 10, 10, 3.33333, 5, 3.33333, -10 )
-
-[sub_resource type="RectangleShape2D" id=31]
+[sub_resource type="RectangleShape2D" id=2]
 
 custom_solver_bias = 0.0
 extents = Vector2( 10, 10 )
 
-[node name="Game" type="Area2D"]
+[node name="Game" type="Area2D" index="0"]
 
-input/pickable = true
+input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
-script/script = ExtResource( 1 )
-__meta__ = { "_edit_lock_":true }
+audio_bus_override = false
+audio_bus_name = "Master"
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="audio" type="SamplePlayer2D" parent="."]
-
-params/volume_db = 0.0
-params/pitch_scale = 1.0
-params/attenuation/min_distance = 1.0
-params/attenuation/max_distance = 2048.0
-params/attenuation/distance_exp = 1.0
-config/polyphony = 2
-config/samples = ExtResource( 2 )
-config/pitch_random = 0.0
-script/script = ExtResource( 3 )
-
-[node name="GUI" type="Node2D" parent="."]
+[node name="GUI" type="Node2D" parent="." index="0"]
 
 editor/display_folded = true
-z/z = 5
 
-[node name="score" type="Label" parent="GUI"]
+[node name="score" type="Label" parent="GUI" index="0"]
 
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 255.0
-margin/top = 4.0
-margin/right = 379.0
-margin/bottom = 39.0
-custom_fonts/font = ExtResource( 4 )
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color = Color( 1, 1, 1, 1 )
 text = "0"
 align = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-__meta__ = { "_edit_lock_":true }
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="lives" type="Label" parent="GUI"]
+[node name="lives" type="Label" parent="GUI" index="1"]
 
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 15.0
-margin/top = 10.0
-margin/right = 50.0
-margin/bottom = 45.0
-custom_fonts/font = ExtResource( 4 )
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color = Color( 0.966957, 0.972656, 0.243164, 1 )
 text = "0"
 align = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-__meta__ = { "_edit_lock_":true }
+__meta__ = {
+"_edit_lock_": true
+}
 
-[node name="banner" type="Label" parent="GUI"]
+[node name="banner" type="Label" parent="GUI" index="2"]
 
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 235.0
-margin/top = 420.0
-margin/right = 405.0
-margin/bottom = 455.0
-custom_fonts/font = ExtResource( 4 )
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color = Color( 0.992188, 0.956337, 0.848785, 1 )
 align = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="wp_info" type="Label" parent="GUI"]
+[node name="wp_info" type="Label" parent="GUI" index="3"]
 
-rect/scale = Vector2( 0.5, 0.5 )
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 25.0
-margin/top = 425.0
-margin/right = 610.0
-margin/bottom = 505.0
-custom_fonts/font = ExtResource( 4 )
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+rect_pivot_offset = Vector2( 0, 0 )
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color = Color( 1, 0.0703125, 0.854736, 1 )
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="background" type="Sprite" parent="."]
+[node name="background" type="Sprite" parent="." index="1"]
 
+texture = ExtResource( 2 )
+centered = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="waypoints" type="Node2D" parent="." index="2"]
+
+editor/display_folded = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Position2D" type="Position2D" parent="waypoints" index="0"]
+
+[node name="Position2D11" type="Position2D" parent="waypoints" index="1"]
+
+[node name="Position2D12" type="Position2D" parent="waypoints" index="2"]
+
+[node name="Position2D13" type="Position2D" parent="waypoints" index="3"]
+
+[node name="Position2D29" type="Position2D" parent="waypoints" index="4"]
+
+[node name="Position2D36" type="Position2D" parent="waypoints" index="5"]
+
+[node name="Position2D14" type="Position2D" parent="waypoints" index="6"]
+
+[node name="Position2D15" type="Position2D" parent="waypoints" index="7"]
+
+[node name="Position2D16" type="Position2D" parent="waypoints" index="8"]
+
+[node name="Position2D17" type="Position2D" parent="waypoints" index="9"]
+
+[node name="Position2D32" type="Position2D" parent="waypoints" index="10"]
+
+[node name="Position2D33" type="Position2D" parent="waypoints" index="11"]
+
+[node name="Position2D18" type="Position2D" parent="waypoints" index="12"]
+
+[node name="Position2D34" type="Position2D" parent="waypoints" index="13"]
+
+[node name="Position2D35" type="Position2D" parent="waypoints" index="14"]
+
+[node name="Position2D19" type="Position2D" parent="waypoints" index="15"]
+
+[node name="Position2D20" type="Position2D" parent="waypoints" index="16"]
+
+[node name="Position2D21" type="Position2D" parent="waypoints" index="17"]
+
+[node name="Position2D22" type="Position2D" parent="waypoints" index="18"]
+
+[node name="Position2D23" type="Position2D" parent="waypoints" index="19"]
+
+[node name="Position2D24" type="Position2D" parent="waypoints" index="20"]
+
+[node name="Position2D1" type="Position2D" parent="waypoints" index="21"]
+
+[node name="Position2D2" type="Position2D" parent="waypoints" index="22"]
+
+[node name="Position2D3" type="Position2D" parent="waypoints" index="23"]
+
+[node name="Position2D4" type="Position2D" parent="waypoints" index="24"]
+
+[node name="Position2D6" type="Position2D" parent="waypoints" index="25"]
+
+[node name="Position2D9" type="Position2D" parent="waypoints" index="26"]
+
+[node name="Position2D10" type="Position2D" parent="waypoints" index="27"]
+
+[node name="Position2D7" type="Position2D" parent="waypoints" index="28"]
+
+[node name="Position2D8" type="Position2D" parent="waypoints" index="29"]
+
+[node name="Position2D5" type="Position2D" parent="waypoints" index="30"]
+
+[node name="Position2D25" type="Position2D" parent="waypoints" index="31"]
+
+[node name="Position2D30" type="Position2D" parent="waypoints" index="32"]
+
+[node name="Position2D26" type="Position2D" parent="waypoints" index="33"]
+
+[node name="Position2D27" type="Position2D" parent="waypoints" index="34"]
+
+[node name="Position2D28" type="Position2D" parent="waypoints" index="35"]
+
+[node name="Position2D31" type="Position2D" parent="waypoints" index="36"]
+
+[node name="wall_list" type="Area2D" parent="." index="3"]
+
+editor/display_folded = true
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="walls" type="Sprite" parent="wall_list" index="0"]
+
+texture = ExtResource( 3 )
+centered = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="wall_list" index="1"]
+
+build_mode = 1
+polygon = PoolVector2Array( -245, -105, -245, 50, -215, 50, -215, -105 )
+
+[node name="CollisionPolygon2D1" type="CollisionPolygon2D" parent="wall_list" index="2"]
+
+build_mode = 1
+polygon = PoolVector2Array( -300, 165, 290, 165, 290, 205, -300, 205 )
+
+[node name="CollisionPolygon2D 2" type="CollisionPolygon2D" parent="wall_list" index="3"]
+
+build_mode = 1
+polygon = PoolVector2Array( 140, 195, 165, 195, 165, 65, 605, 65, 605, 45, 25, 45, 25, 70, 140, 70, 140, 135 )
+
+[node name="CollisionPolygon2D 3" type="CollisionPolygon2D" parent="wall_list" index="4"]
+
+build_mode = 0
+polygon = PoolVector2Array( 200, 175, 200, 290, 225, 290, 225, 175 )
+
+[node name="CollisionPolygon2D 4" type="CollisionPolygon2D" parent="wall_list" index="5"]
+
+build_mode = 0
+polygon = PoolVector2Array( 112, 120, 121.057, 117.5, 132, 120, 132, 172.5, 121.437, 177.5, 112, 172.5 )
+
+[node name="CollisionPolygon2D 5" type="CollisionPolygon2D" parent="wall_list" index="6"]
+
+build_mode = 0
+polygon = PoolVector2Array( 25, 325, 105, 325, 105, 350, 25, 350, 25, 405, 10, 405, 10, 70, 25, 70 )
+
+[node name="CollisionPolygon2D 6" type="CollisionPolygon2D" parent="wall_list" index="7"]
+
+build_mode = 0
+polygon = PoolVector2Array( 610, 60, 610, 175, 570, 175, 570, 200, 610, 200, 610, 405, 635, 405, 635, 60 )
+
+[node name="CollisionPolygon2D 7" type="CollisionPolygon2D" parent="wall_list" index="8"]
+
+build_mode = 0
+polygon = PoolVector2Array( 205, 330, 215, 325, 350, 325, 350, 355, 205, 355 )
+
+[node name="CollisionPolygon2D 8" type="CollisionPolygon2D" parent="wall_list" index="9"]
+
+build_mode = 0
+polygon = PoolVector2Array( 265, 265, 410, 265, 410, 355, 385, 355, 385, 290, 265, 290 )
+
+[node name="CollisionPolygon2D 9" type="CollisionPolygon2D" parent="wall_list" index="10"]
+
+build_mode = 0
+polygon = PoolVector2Array( 355, 110, 410, 110, 410, 230, 385, 230, 385, 135, 355, 135 )
+
+[node name="CollisionPolygon2D 10" type="CollisionPolygon2D" parent="wall_list" index="11"]
+
+build_mode = 0
+polygon = PoolVector2Array( 200, 115, 320, 115, 320, 140, 200, 140 )
+
+[node name="CollisionPolygon2D 11" type="CollisionPolygon2D" parent="wall_list" index="12"]
+
+build_mode = 0
+polygon = PoolVector2Array( 510, 110, 510, 140, 565, 140, 565, 110 )
+
+[node name="CollisionPolygon2D 12" type="CollisionPolygon2D" parent="wall_list" index="13"]
+
+build_mode = 0
+polygon = PoolVector2Array( 445, 110, 475, 110, 475, 175, 535, 175, 535, 200, 445, 200 )
+
+[node name="CollisionPolygon2D 13" type="CollisionPolygon2D" parent="wall_list" index="14"]
+
+build_mode = 0
+polygon = PoolVector2Array( 445, 235, 450, 295, 470, 295, 475, 260, 565, 260, 565, 235 )
+
+[node name="CollisionPolygon2D 14" type="CollisionPolygon2D" parent="wall_list" index="15"]
+
+build_mode = 0
+polygon = PoolVector2Array( 445, 325, 450, 355, 565, 350, 560, 305, 515, 300, 505, 325 )
+
+[node name="web" type="Area2D" parent="." index="4"]
+
+editor/display_folded = true
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="web_collision" type="CollisionShape2D" parent="web" index="0"]
+
+shape = SubResource( 1 )
+
+[node name="bunker" type="Node2D" parent="." index="5"]
+
+editor/display_folded = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="bunker_space" type="Area2D" parent="bunker" index="0"]
+
+editor/display_folded = true
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="bunker/bunker_space" index="0"]
+
+build_mode = 0
+polygon = PoolVector2Array( -10, -10, -3.33334, -10, -3.33334, 5, 3.33333, 5, 3.33333, -10, 10, -10, 10, 10, -10, 10 )
+
+[node name="bunkerUR" type="Area2D" parent="bunker" index="1"]
+
+editor/display_folded = true
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+
+[node name="Sprite2" type="Sprite" parent="bunker/bunkerUR" index="0"]
+
+texture = ExtResource( 4 )
+region_rect = Rect2( 51, 0, 51, 34 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bunker/bunkerUR" index="1"]
+
+shape = SubResource( 2 )
+
+[node name="bunkerUL" type="Area2D" parent="bunker" index="2"]
+
+editor/display_folded = true
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+
+[node name="Sprite2" type="Sprite" parent="bunker/bunkerUL" index="0"]
+
+texture = ExtResource( 4 )
+region_rect = Rect2( 0, 0, 51, 34 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bunker/bunkerUL" index="1"]
+
+shape = SubResource( 2 )
+
+[node name="bunkerLL" type="Area2D" parent="bunker" index="3"]
+
+editor/display_folded = true
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+
+[node name="Sprite2" type="Sprite" parent="bunker/bunkerLL" index="0"]
+
+texture = ExtResource( 4 )
+region_rect = Rect2( 0, 34, 51, 34 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bunker/bunkerLL" index="1"]
+
+shape = SubResource( 2 )
+
+[node name="bunkerLR" type="Area2D" parent="bunker" index="4"]
+
+editor/display_folded = true
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+
+[node name="Sprite2" type="Sprite" parent="bunker/bunkerLR" index="0"]
+
+texture = ExtResource( 4 )
+region_rect = Rect2( 51, 34, 51, 34 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="bunker/bunkerLR" index="1"]
+
+shape = SubResource( 2 )
+
+[node name="title" type="Node2D" parent="." index="6"]
+
+[node name="image" type="Sprite" parent="title" index="0"]
+
+position = Vector2( 1, 36 )
+scale = Vector2( 1.99375, 1.99375 )
 texture = ExtResource( 5 )
 centered = false
-__meta__ = { "_edit_lock_":true }
-
-[node name="waypoints" type="Node2D" parent="."]
-
-editor/display_folded = true
-script/script = ExtResource( 6 )
-__meta__ = { "_edit_lock_":true }
-
-[node name="Position2D" type="Position2D" parent="waypoints"]
-
-transform/pos = Vector2( 185, 90 )
-script/script = ExtResource( 7 )
-north = false
-east = true
-south = true
-west = false
-gun_spawn = false
-human_only = false
-
-[node name="Position2D11" type="Position2D" parent="waypoints"]
-
-transform/pos = Vector2( 185, 160 )
-script/script = ExtResource( 7 )
-north = true
-east = true
-south = true
-west = false
-gun_spawn = false
-human_only = false
-
-[node name="Position2D12" type="Position2D" parent="waypoints"]
-
-transform/pos = Vector2( 245, 160 )
-script/script = ExtResource( 7 )
-north = false
-east = true
-south = true
-west = true
-gun_spawn = false
-human_only = false
-
-[node name="Position2D13" type="Position2D" parent="waypoints"]
-
-transform/pos = Vector2( 340, 160 )
-script/script = ExtResource( 7 )
-north = true
-east = true
-south = false
-west = true
-gun_spawn = false
-human_only = false
-
-[node name="Position2D29" type="Position2D" parent="waypoints"]
-
-transform/pos = Vector2( 300, 160 )
-script/script = ExtResource( 7 )
-north = true
-east = true
-south = true
-west = true
-gun_spawn = true
-human_only = false
-
-[node name="Position2D36" type="Position2D" parent="waypoints"]
-
-transform/pos = Vector2( 300, 205 )
-script/script = ExtResource( 7 )
-north = true
-east = true
-south = false
-west = true
-gun_spawn = false
-human_only = true
-
-[node name="Position2D14" type="Position2D" parent="waypoints"]
-
-transform/pos = Vector2( 365, 160 )
-script/script = ExtResource( 7 )
-north = false
-east = false
-south = true
-west = true
-gun_spawn = false
-human_only = false
-
-[node name="Position2D15" type="Position2D" parent="waypoints"]
-
-transform/pos = Vector2( 365, 250 )
-script/script = ExtResource( 7 )
-north = true
-east = true
-south = false
-west = true
-gun_spawn = false
-human_only = false
-
-[node name="Position2D16" type="Position2D" parent="waypoints"]
-
-transform/pos = Vector2( 245, 250 )
-script/script = ExtResource( 7 )
-north = true
-east = true
-south = true
-west = false
-gun_spawn = false
-human_only = false
-
-[node name="Position2D17" type="Position2D" parent="waypoints"]
-
-transform/pos = Vector2( 245, 310 )
-script/script = ExtResource( 7 )
-north = true
-east = true
-south = false
-west = true
-gun_spawn = false
-human_only = false
-
-[node name="Position2D32" type="Position2D" parent="waypoints"]
-
-transform/pos = Vector2( 370, 310 )
-script/script = ExtResource( 7 )
-north = false
-east = false
-south = true
-west = true
-gun_spawn = false
-human_only = false
-
-[node name="Position2D33" type="Position2D" parent="waypoints"]
-
-transform/pos = Vector2( 370, 375 )
-script/script = ExtResource( 7 )
-north = true
-east = true
-south = false
-west = true
-gun_spawn = false
-human_only = false
-
-[node name="Position2D18" type="Position2D" parent="waypoints"]
-
-transform/pos = Vector2( 185, 310 )
-script/script = ExtResource( 7 )
-north = true
-east = true
-south = true
-west = false
-gun_spawn = false
-human_only = false
-
-[node name="Position2D34" type="Position2D" parent="waypoints"]
-
-transform/pos = Vector2( 185, 375 )
-script/script = ExtResource( 7 )
-north = true
-east = true
-south = false
-west = true
-gun_spawn = true
-human_only = false
-
-[node name="Position2D35" type="Position2D" parent="waypoints"]
-
-transform/pos = Vector2( 120, 375 )
-script/script = ExtResource( 7 )
-north = true
-east = true
-south = false
-west = false
-gun_spawn = false
-human_only = false
-
-[node name="Position2D19" type="Position2D" parent="waypoints"]
-
-transform/pos = Vector2( 185, 215 )
-script/script = ExtResource( 7 )
-north = true
-east = false
-south = true
-west = true
-gun_spawn = false
-human_only = false
-
-[node name="Position2D20" type="Position2D" parent="waypoints"]
-
-transform/pos = Vector2( 120, 215 )
-script/script = ExtResource( 7 )
-north = true
-east = true
-south = true
-west = false
-gun_spawn = false
-human_only = false
-
-[node name="Position2D21" type="Position2D" parent="waypoints"]
-
-transform/pos = Vector2( 120, 110 )
-script/script = ExtResource( 7 )
-north = false
-east = false
-south = true
-west = true
-gun_spawn = false
-human_only = false
-
-[node name="Position2D22" type="Position2D" parent="waypoints"]
-
-transform/pos = Vector2( 55, 110 )
-script/script = ExtResource( 7 )
-north = false
-east = true
-south = true
-west = false
-gun_spawn = false
-human_only = false
-
-[node name="Position2D23" type="Position2D" parent="waypoints"]
-
-transform/pos = Vector2( 55, 310 )
-script/script = ExtResource( 7 )
-north = true
-east = true
-south = false
-west = false
-gun_spawn = false
-human_only = false
-
-[node name="Position2D24" type="Position2D" parent="waypoints"]
-
-transform/pos = Vector2( 120, 310 )
-script/script = ExtResource( 7 )
-north = true
-east = false
-south = true
-west = true
-gun_spawn = true
-human_only = false
-
-[node name="Position2D1" type="Position2D" parent="waypoints"]
-
-transform/pos = Vector2( 340, 90 )
-script/script = ExtResource( 7 )
-north = false
-east = true
-south = true
-west = true
-gun_spawn = false
-human_only = false
-
-[node name="Position2D2" type="Position2D" parent="waypoints"]
-
-transform/pos = Vector2( 430, 90 )
-script/script = ExtResource( 7 )
-north = false
-east = true
-south = true
-west = true
-gun_spawn = false
-human_only = false
-
-[node name="Position2D3" type="Position2D" parent="waypoints"]
-
-transform/pos = Vector2( 430, 215 )
-script/script = ExtResource( 7 )
-north = true
-east = true
-south = true
-west = false
-gun_spawn = false
-human_only = false
-
-[node name="Position2D4" type="Position2D" parent="waypoints"]
-
-transform/pos = Vector2( 555, 215 )
-script/script = ExtResource( 7 )
-north = true
-east = true
-south = false
-west = true
-gun_spawn = false
-human_only = false
-
-[node name="Position2D6" type="Position2D" parent="waypoints"]
-
-transform/pos = Vector2( 555, 160 )
-script/script = ExtResource( 7 )
-north = false
-east = true
-south = true
-west = true
-gun_spawn = true
-human_only = false
-
-[node name="Position2D9" type="Position2D" parent="waypoints"]
-
-transform/pos = Vector2( 585, 160 )
-script/script = ExtResource( 7 )
-north = true
-east = false
-south = false
-west = true
-gun_spawn = false
-human_only = false
-
-[node name="Position2D10" type="Position2D" parent="waypoints"]
-
-transform/pos = Vector2( 585, 90 )
-script/script = ExtResource( 7 )
-north = false
-east = false
-south = true
-west = true
-gun_spawn = false
-human_only = false
-
-[node name="Position2D7" type="Position2D" parent="waypoints"]
-
-transform/pos = Vector2( 490, 160 )
-script/script = ExtResource( 7 )
-north = true
-east = true
-south = false
-west = false
-gun_spawn = false
-human_only = false
-
-[node name="Position2D8" type="Position2D" parent="waypoints"]
-
-transform/pos = Vector2( 490, 90 )
-script/script = ExtResource( 7 )
-north = false
-east = true
-south = true
-west = true
-gun_spawn = false
-human_only = false
-
-[node name="Position2D5" type="Position2D" parent="waypoints"]
-
-transform/pos = Vector2( 585, 215 )
-script/script = ExtResource( 7 )
-north = false
-east = false
-south = true
-west = true
-gun_spawn = false
-human_only = false
-
-[node name="Position2D25" type="Position2D" parent="waypoints"]
-
-transform/pos = Vector2( 585, 280 )
-script/script = ExtResource( 7 )
-north = true
-east = false
-south = true
-west = true
-gun_spawn = false
-human_only = false
-
-[node name="Position2D30" type="Position2D" parent="waypoints"]
-
-transform/pos = Vector2( 585, 375 )
-script/script = ExtResource( 7 )
-north = true
-east = false
-south = false
-west = true
-gun_spawn = true
-human_only = false
-
-[node name="Position2D26" type="Position2D" parent="waypoints"]
-
-transform/pos = Vector2( 490, 280 )
-script/script = ExtResource( 7 )
-north = false
-east = true
-south = true
-west = false
-gun_spawn = false
-human_only = false
-
-[node name="Position2D27" type="Position2D" parent="waypoints"]
-
-transform/pos = Vector2( 490, 310 )
-script/script = ExtResource( 7 )
-north = true
-east = false
-south = false
-west = true
-gun_spawn = false
-human_only = false
-
-[node name="Position2D28" type="Position2D" parent="waypoints"]
-
-transform/pos = Vector2( 430, 310 )
-script/script = ExtResource( 7 )
-north = true
-east = true
-south = true
-west = false
-gun_spawn = false
-human_only = false
-
-[node name="Position2D31" type="Position2D" parent="waypoints"]
-
-transform/pos = Vector2( 430, 375 )
-script/script = ExtResource( 7 )
-north = true
-east = true
-south = false
-west = true
-gun_spawn = false
-human_only = false
-
-[node name="wall_list" type="Area2D" parent="."]
-
-editor/display_folded = true
-input/pickable = true
-shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, 320, 240 )
-shapes/0/trigger = false
-shapes/1/shape = SubResource( 2 )
-shapes/1/transform = Matrix32( 1, 0, 0, 1, 320, 240 )
-shapes/1/trigger = false
-shapes/2/shape = SubResource( 3 )
-shapes/2/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-shapes/2/trigger = false
-shapes/3/shape = SubResource( 4 )
-shapes/3/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-shapes/3/trigger = false
-shapes/4/shape = SubResource( 5 )
-shapes/4/transform = Matrix32( 1.25, 0, 0, 2, 0, 0 )
-shapes/4/trigger = false
-shapes/5/shape = SubResource( 6 )
-shapes/5/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-shapes/5/trigger = false
-shapes/6/shape = SubResource( 7 )
-shapes/6/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-shapes/6/trigger = false
-shapes/7/shape = SubResource( 8 )
-shapes/7/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-shapes/7/trigger = false
-shapes/8/shape = SubResource( 9 )
-shapes/8/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-shapes/8/trigger = false
-shapes/9/shape = SubResource( 10 )
-shapes/9/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-shapes/9/trigger = false
-shapes/10/shape = SubResource( 11 )
-shapes/10/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-shapes/10/trigger = false
-shapes/11/shape = SubResource( 12 )
-shapes/11/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-shapes/11/trigger = false
-shapes/12/shape = SubResource( 13 )
-shapes/12/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-shapes/12/trigger = false
-shapes/13/shape = SubResource( 14 )
-shapes/13/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-shapes/13/trigger = false
-shapes/14/shape = SubResource( 15 )
-shapes/14/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-shapes/14/trigger = false
-shapes/15/shape = SubResource( 16 )
-shapes/15/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-shapes/15/trigger = false
-shapes/16/shape = SubResource( 17 )
-shapes/16/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-shapes/16/trigger = false
-shapes/17/shape = SubResource( 18 )
-shapes/17/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-shapes/17/trigger = false
-shapes/18/shape = SubResource( 19 )
-shapes/18/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-shapes/18/trigger = false
-shapes/19/shape = SubResource( 20 )
-shapes/19/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-shapes/19/trigger = false
-shapes/20/shape = SubResource( 21 )
-shapes/20/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-shapes/20/trigger = false
-shapes/21/shape = SubResource( 22 )
-shapes/21/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-shapes/21/trigger = false
-shapes/22/shape = SubResource( 23 )
-shapes/22/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-shapes/22/trigger = false
-shapes/23/shape = SubResource( 24 )
-shapes/23/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-shapes/23/trigger = false
-shapes/24/shape = SubResource( 25 )
-shapes/24/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-shapes/24/trigger = false
-shapes/25/shape = SubResource( 26 )
-shapes/25/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-shapes/25/trigger = false
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
-script/script = ExtResource( 8 )
-__meta__ = { "_edit_group_":true, "_edit_lock_":true }
-
-[node name="walls" type="Sprite" parent="wall_list"]
-
-z/z = 2
-texture = ExtResource( 9 )
-centered = false
-__meta__ = { "_edit_lock_":true }
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="wall_list"]
-
-transform/pos = Vector2( 320, 240 )
-build_mode = 1
-polygon = Vector2Array( -245, -105, -245, 50, -215, 50, -215, -105 )
-shape_range = Vector2( 0, 0 )
-trigger = false
-
-[node name="CollisionPolygon2D1" type="CollisionPolygon2D" parent="wall_list"]
-
-transform/pos = Vector2( 320, 240 )
-build_mode = 1
-polygon = Vector2Array( -300, 165, 290, 165, 290, 205, -300, 205 )
-shape_range = Vector2( 1, 1 )
-trigger = false
-
-[node name="CollisionPolygon2D 2" type="CollisionPolygon2D" parent="wall_list"]
-
-build_mode = 1
-polygon = Vector2Array( 140, 195, 165, 195, 165, 65, 605, 65, 605, 45, 25, 45, 25, 70, 140, 70, 140, 135 )
-shape_range = Vector2( 2, 2 )
-trigger = false
-
-[node name="CollisionPolygon2D 3" type="CollisionPolygon2D" parent="wall_list"]
-
-build_mode = 0
-polygon = Vector2Array( 200, 175, 200, 290, 225, 290, 225, 175 )
-shape_range = Vector2( 3, 3 )
-trigger = false
-
-[node name="CollisionPolygon2D 4" type="CollisionPolygon2D" parent="wall_list"]
-
-transform/scale = Vector2( 1.25, 2 )
-build_mode = 0
-polygon = Vector2Array( 112, 120, 121.057, 117.5, 132, 120, 132, 172.5, 121.437, 177.5, 112, 172.5 )
-shape_range = Vector2( 4, 4 )
-trigger = false
-
-[node name="CollisionPolygon2D 5" type="CollisionPolygon2D" parent="wall_list"]
-
-build_mode = 0
-polygon = Vector2Array( 25, 325, 105, 325, 105, 350, 25, 350, 25, 405, 10, 405, 10, 70, 25, 70 )
-shape_range = Vector2( 5, 8 )
-trigger = false
-
-[node name="CollisionPolygon2D 6" type="CollisionPolygon2D" parent="wall_list"]
-
-build_mode = 0
-polygon = Vector2Array( 610, 60, 610, 175, 570, 175, 570, 200, 610, 200, 610, 405, 635, 405, 635, 60 )
-shape_range = Vector2( 9, 12 )
-trigger = false
-
-[node name="CollisionPolygon2D 7" type="CollisionPolygon2D" parent="wall_list"]
-
-build_mode = 0
-polygon = Vector2Array( 205, 330, 215, 325, 350, 325, 350, 355, 205, 355 )
-shape_range = Vector2( 13, 13 )
-trigger = false
-
-[node name="CollisionPolygon2D 8" type="CollisionPolygon2D" parent="wall_list"]
-
-build_mode = 0
-polygon = Vector2Array( 265, 265, 410, 265, 410, 355, 385, 355, 385, 290, 265, 290 )
-shape_range = Vector2( 14, 15 )
-trigger = false
-
-[node name="CollisionPolygon2D 9" type="CollisionPolygon2D" parent="wall_list"]
-
-build_mode = 0
-polygon = Vector2Array( 355, 110, 410, 110, 410, 230, 385, 230, 385, 135, 355, 135 )
-shape_range = Vector2( 16, 17 )
-trigger = false
-
-[node name="CollisionPolygon2D 10" type="CollisionPolygon2D" parent="wall_list"]
-
-build_mode = 0
-polygon = Vector2Array( 200, 115, 320, 115, 320, 140, 200, 140 )
-shape_range = Vector2( 18, 18 )
-trigger = false
-
-[node name="CollisionPolygon2D 11" type="CollisionPolygon2D" parent="wall_list"]
-
-build_mode = 0
-polygon = Vector2Array( 510, 110, 510, 140, 565, 140, 565, 110 )
-shape_range = Vector2( 19, 19 )
-trigger = false
-
-[node name="CollisionPolygon2D 12" type="CollisionPolygon2D" parent="wall_list"]
-
-build_mode = 0
-polygon = Vector2Array( 445, 110, 475, 110, 475, 175, 535, 175, 535, 200, 445, 200 )
-shape_range = Vector2( 20, 21 )
-trigger = false
-
-[node name="CollisionPolygon2D 13" type="CollisionPolygon2D" parent="wall_list"]
-
-build_mode = 0
-polygon = Vector2Array( 445, 235, 450, 295, 470, 295, 475, 260, 565, 260, 565, 235 )
-shape_range = Vector2( 22, 23 )
-trigger = false
-
-[node name="CollisionPolygon2D 14" type="CollisionPolygon2D" parent="wall_list"]
-
-build_mode = 0
-polygon = Vector2Array( 445, 325, 450, 355, 565, 350, 560, 305, 515, 300, 505, 325 )
-shape_range = Vector2( 24, 25 )
-trigger = false
-
-[node name="web" type="Area2D" parent="."]
-
-editor/display_folded = true
-input/pickable = true
-shapes/0/shape = SubResource( 27 )
-shapes/0/transform = Matrix32( 5.57692, 0, 0, 3.26923, 82.5, 107.5 )
-shapes/0/trigger = false
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
-script/script = ExtResource( 10 )
-__meta__ = { "_edit_lock_":true }
-
-[node name="web_collision" type="CollisionShape2D" parent="web"]
-
-transform/pos = Vector2( 82.5, 107.5 )
-transform/scale = Vector2( 5.57692, 3.26923 )
-shape = SubResource( 27 )
-trigger = false
-_update_shape_index = 0
-
-[node name="bunker" type="Node2D" parent="."]
-
-transform/pos = Vector2( 288, 208 )
-transform/scale = Vector2( 0.9, 0.9 )
-z/z = 1
-__meta__ = { "_edit_lock_":true }
-
-[node name="bunker_space" type="Area2D" parent="bunker"]
-
-editor/display_folded = true
-visibility/visible = false
-z/z = -1
-input/pickable = true
-shapes/0/shape = SubResource( 28 )
-shapes/0/transform = Matrix32( 5, 0, 0, 3.33333, 12.4445, -4.22223 )
-shapes/0/trigger = false
-shapes/1/shape = SubResource( 29 )
-shapes/1/transform = Matrix32( 5, 0, 0, 3.33333, 12.4445, -4.22223 )
-shapes/1/trigger = false
-shapes/2/shape = SubResource( 30 )
-shapes/2/transform = Matrix32( 5, 0, 0, 3.33333, 12.4445, -4.22223 )
-shapes/2/trigger = false
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
-script/script = ExtResource( 11 )
-__meta__ = { "_edit_group_":true, "_edit_lock_":true }
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="bunker/bunker_space"]
-
-transform/pos = Vector2( 12.4445, -4.22223 )
-transform/scale = Vector2( 5, 3.33333 )
-build_mode = 0
-polygon = Vector2Array( -10, -10, -3.33334, -10, -3.33334, 5, 3.33333, 5, 3.33333, -10, 10, -10, 10, 10, -10, 10 )
-shape_range = Vector2( 0, 2 )
-trigger = false
-
-[node name="bunkerUR" type="Area2D" parent="bunker"]
-
-editor/display_folded = true
-transform/pos = Vector2( 38.8889, -22.2222 )
-input/pickable = true
-shapes/0/shape = SubResource( 31 )
-shapes/0/transform = Matrix32( 2.60204, 0, 0, 1.76939, -0.367931, 0.701591 )
-shapes/0/trigger = false
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
-script/script = ExtResource( 12 )
-
-[node name="Sprite2" type="Sprite" parent="bunker/bunkerUR"]
-
-texture = ExtResource( 13 )
-region = true
-region_rect = Rect2( 51, 0, 51, 34 )
-__meta__ = { "_edit_lock_":true }
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="bunker/bunkerUR"]
-
-transform/pos = Vector2( -0.367931, 0.701591 )
-transform/scale = Vector2( 2.60204, 1.76939 )
-shape = SubResource( 31 )
-trigger = false
-_update_shape_index = 0
-
-[node name="bunkerUL" type="Area2D" parent="bunker"]
-
-editor/display_folded = true
-transform/pos = Vector2( -11.1111, -22.2222 )
-input/pickable = true
-shapes/0/shape = SubResource( 31 )
-shapes/0/transform = Matrix32( 2.60204, 0, 0, 1.76939, -0.367931, 0.701591 )
-shapes/0/trigger = false
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
-script/script = ExtResource( 12 )
-
-[node name="Sprite2" type="Sprite" parent="bunker/bunkerUL"]
-
-texture = ExtResource( 13 )
-region = true
-region_rect = Rect2( 0, 0, 51, 34 )
-__meta__ = { "_edit_lock_":true }
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="bunker/bunkerUL"]
-
-transform/pos = Vector2( -0.367931, 0.701591 )
-transform/scale = Vector2( 2.60204, 1.76939 )
-shape = SubResource( 31 )
-trigger = false
-_update_shape_index = 0
-
-[node name="bunkerLL" type="Area2D" parent="bunker"]
-
-editor/display_folded = true
-transform/pos = Vector2( -11.1111, 11.1111 )
-input/pickable = true
-shapes/0/shape = SubResource( 31 )
-shapes/0/transform = Matrix32( 2.60204, 0, 0, 1.76939, -0.367931, 0.701591 )
-shapes/0/trigger = false
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
-script/script = ExtResource( 12 )
-
-[node name="Sprite2" type="Sprite" parent="bunker/bunkerLL"]
-
-texture = ExtResource( 13 )
-region = true
-region_rect = Rect2( 0, 34, 51, 34 )
-__meta__ = { "_edit_lock_":true }
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="bunker/bunkerLL"]
-
-transform/pos = Vector2( -0.367931, 0.701591 )
-transform/scale = Vector2( 2.60204, 1.76939 )
-shape = SubResource( 31 )
-trigger = false
-_update_shape_index = 0
-
-[node name="bunkerLR" type="Area2D" parent="bunker"]
-
-editor/display_folded = true
-transform/pos = Vector2( 38.8889, 11.1111 )
-input/pickable = true
-shapes/0/shape = SubResource( 31 )
-shapes/0/transform = Matrix32( 2.60204, 0, 0, 1.76939, -0.367931, 0.701591 )
-shapes/0/trigger = false
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
-script/script = ExtResource( 12 )
-
-[node name="Sprite2" type="Sprite" parent="bunker/bunkerLR"]
-
-texture = ExtResource( 13 )
-region = true
-region_rect = Rect2( 51, 34, 51, 34 )
-__meta__ = { "_edit_lock_":true }
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="bunker/bunkerLR"]
-
-transform/pos = Vector2( -0.367931, 0.701591 )
-transform/scale = Vector2( 2.60204, 1.76939 )
-shape = SubResource( 31 )
-trigger = false
-_update_shape_index = 0
-
-[node name="title" type="Node2D" parent="."]
-
-process/pause_mode = 2
-visibility/visible = false
-z/z = 2
-script/script = ExtResource( 14 )
-
-[node name="image" type="Sprite" parent="title"]
-
-transform/pos = Vector2( 320, 240 )
-transform/scale = Vector2( 2, 2.4 )
-z/z = 3
-texture = ExtResource( 15 )
-
-[connection signal="area_enter" from="wall_list" to="wall_list" method="_collide"]
-
-[connection signal="area_exit" from="wall_list" to="wall_list" method="_uncollide"]
-
-[connection signal="area_enter" from="web" to="web" method="_collide"]
-
-[connection signal="area_enter" from="bunker/bunker_space" to="bunker/bunker_space" method="_hit_enter"]
-
-[connection signal="area_enter" from="bunker/bunkerUR" to="bunker/bunkerUR" method="_hit"]
-
-[connection signal="area_enter" from="bunker/bunkerUL" to="bunker/bunkerUL" method="_hit"]
-
-[connection signal="area_enter" from="bunker/bunkerLL" to="bunker/bunkerLL" method="_hit"]
-
-[connection signal="area_enter" from="bunker/bunkerLR" to="bunker/bunkerLR" method="_hit"]
 
 

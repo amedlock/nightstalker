@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=1]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://game/bat/bat.gd" type="Script" id=1]
 [ext_resource path="res://game/bat/bat.png" type="Texture" id=2]
@@ -10,56 +10,53 @@ extents = Vector2( 10, 10 )
 
 [sub_resource type="Animation" id=2]
 
-resource/name = "movement"
 length = 1.5
 loop = true
 step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath("image:frame")
 tracks/0/interp = 1
+tracks/0/loop_wrap = true
 tracks/0/imported = false
-tracks/0/keys = { "times":FloatArray( 0, 0.4, 0.8, 1.2 ), "transitions":FloatArray( 1, 1, 1, 1 ), "update":1, "values":[ 0, 1, 2, 3 ] }
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 0.8, 1.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3 ]
+}
 
-[node name="bat1" type="Area2D"]
+[node name="bat1" type="Area2D" index="0"]
 
-transform/pos = Vector2( 422.241, 248.058 )
-transform/scale = Vector2( 1.25, 1.25 )
-z/z = 2
-input/pickable = false
-shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-shapes/0/trigger = false
+input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
-script/script = ExtResource( 1 )
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 1 )
 speed = 30
 
-[node name="image" type="Sprite" parent="."]
+[node name="image" type="Sprite" parent="." index="0"]
 
 texture = ExtResource( 2 )
 hframes = 4
 frame = 3
 region_rect = Rect2( 109, 0, 88, 18 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 
 shape = SubResource( 1 )
-trigger = false
-_update_shape_index = 0
 
-[node name="anim" type="AnimationPlayer" parent="."]
+[node name="anim" type="AnimationPlayer" parent="." index="2"]
 
-playback/process_mode = 1
-playback/default_blend_time = 0.0
-root/root = NodePath("..")
-anims/movement = SubResource( 2 )
-playback/active = true
-playback/speed = 2.0
-blend_times = [  ]
+root_node = NodePath("..")
 autoplay = "movement"
-
-[connection signal="area_enter" from="." to="." method="_collide"]
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+playback_speed = 1.0
+anims/movement = SubResource( 2 )
+blend_times = [  ]
 
 
