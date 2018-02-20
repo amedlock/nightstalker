@@ -31,6 +31,7 @@ func _input(event):
 			$maze.start_game()
 			$title.hide()
 			$maze.show()
+			$BG.start()
 		if event.scancode==KEY_F10:
 			get_tree().quit()
 		elif event.scancode==KEY_DELETE and $maze.player!=null:
@@ -41,7 +42,7 @@ func _input(event):
 			$maze.player.bullets += 100
 
 func game_over():
-	$maze/GUI/banner.set_text("Game Over")
+	$maze.get_node("GUI/Container").show()
 	state="game_over"
 	$audio.stop()
 

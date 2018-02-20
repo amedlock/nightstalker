@@ -35,6 +35,7 @@ var next_wp # next one to move to, these two vars can switch if we change direct
 
 
 func _ready():
+	connect("area_entered", self, "_hit")
 	maze = get_parent()
 	audio = maze.get_node("audio")
 	self.add_to_group("enemies")
@@ -147,7 +148,7 @@ func fire_at_player(delta):
 	if maze.player==null or maze.player.state!="ok" :
 		return
 	if fire_timer>0:
-		fire_timer =max( fire_timer- delta, 0)		
+		fire_timer =max( fire_timer-delta, 0)		
 	var player = maze.player
 	if player==null:
 		return

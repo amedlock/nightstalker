@@ -205,10 +205,12 @@ func stun_process(delta):
 	delay -= delta
 	if delay <=0:
 		anim.play("stand")
-		reset()
+		state = "ok"
 		
 	
 func kill():
+	self.lives -= 1
+	get_parent().update_ui()
 	state = "dead"
 	anim.play("death")
 	audio.stream = load("res://sound/death1.wav")

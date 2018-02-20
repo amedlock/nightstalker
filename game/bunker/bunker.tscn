@@ -136,7 +136,7 @@ region_enabled = true
 region_rect = Rect2( 51, 34, 51, 34 )
 _sections_unfolded = [ "Region", "Z Index" ]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="." index="4"]
+[node name="bunker_body" type="StaticBody2D" parent="." index="4"]
 
 input_pickable = false
 collision_layer = 1
@@ -147,7 +147,7 @@ friction = 1.0
 bounce = 0.0
 _sections_unfolded = [ "Collision" ]
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" index="0"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="bunker_body" index="0"]
 
 build_mode = 0
 polygon = PoolVector2Array( -24.2699, -15.6603, 10.2108, -15.6603, 10.0171, 28.6997, 38.6864, 28.506, 38.8801, -15.2728, 74.5231, -15.0791, 74.3294, 47.6835, -24.2699, 47.8772 )

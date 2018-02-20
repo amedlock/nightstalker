@@ -1,12 +1,7 @@
-
 extends Node
 
-# member variables here, example:
-# var a=2
-# var b="textvar"
-
 func _ready():
-	pass
+	connect("area_entered", self, "_hit")
 
 
 func _hit( other ):

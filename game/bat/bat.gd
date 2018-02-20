@@ -8,15 +8,14 @@ var points = 300
 var anim
 
 
-var index = 0
-
 var maze
 var waypoints
 var last_wp = null
 var next_wp = null
 
 
-func _ready():	
+func _ready():
+	connect("area_entered", self, "_hit")
 	maze = get_parent()
 	waypoints = maze.get_node("waypoints")
 	anim = self.get_node("anim")
@@ -61,9 +60,9 @@ func kill():
 	maze.audio.stream = load("res://sound/bat_death.wav")
 	maze.audio.play()
 	var n = expl.instance()
-	n.translate( Vector2(0,1) )
-	n.connect("tree_exited", maze, "spawn_bat", [index] )
-	self.get_parent().add_child( n )	
+	self.get_parent().add_child( n )
+	n.position = self.position 
+	n.connect("tree_exiting", maze, "spawn_bat" )
 	self.queue_free()
 	
 	

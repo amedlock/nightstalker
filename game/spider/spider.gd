@@ -13,6 +13,7 @@ var next_wp = null
 
 func _ready():
 	connect("area_entered", self, "_hit" )
+	connect("body_entered", self, "_hit" )
 	maze = get_parent()
 	sprite = get_node("image")
 	waypoints = maze.get_node("waypoints")
@@ -35,15 +36,18 @@ func move_towards( pt, delta ):
 	var dist = pos.distance_to(pt)
 	if dist < 0.75:
 		return false
-	var vel = ( pt - pos ).normalized() * delta * speed
-	position = ( pos + vel )
-	sprite.set_flip_v( vel.y > 0 )
-	if pt.x>pos.x:
-		sprite.set_rot( -deg90 )
-	elif pt.x<pos.x:
-		sprite.set_rot( deg90 )
+	var diff = (pt - position )
+	if abs(diff.x) > abs(diff.y):
+		diff.y = 0
 	else:
-		sprite.set_rot( 0 )
+		diff.x = 0
+	var vel = diff.normalized() * delta * speed
+	self.position = ( pos + vel )
+	var rot = 0
+	if vel.x > 0 : rot = deg90
+	elif vel.x < 0 : rot = -deg90 
+	elif vel.y > 0 : rot = deg90 * 2
+	sprite.rotation = rot 
 	return true
 	
 		
@@ -67,9 +71,11 @@ func _hit(other):
 		self.kill()
 		
 func kill():
+	maze.audio.stream = load("res://sound/bat_death.wav")
+	maze.audio.play()
 	var n = expl.instance()
 	self.get_parent().add_child( n )
-	n.position = ( position + Vector2(0,1) )
-	n.connect("exit_tree", maze, "spawn_spider" )
+	n.position = position 
+	n.connect("tree_exiting", maze, "spawn_spider" )
 	self.queue_free()
 	

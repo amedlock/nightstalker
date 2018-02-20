@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://game/maze/maze.gd" type="Script" id=1]
 [ext_resource path="res://game/maze/walls_bg.png" type="Texture" id=2]
@@ -8,13 +8,14 @@
 [ext_resource path="res://game/spider/web.gd" type="Script" id=6]
 [ext_resource path="res://game/bunker/bunker.tscn" type="PackedScene" id=7]
 [ext_resource path="res://game/human/human.tscn" type="PackedScene" id=8]
+[ext_resource path="res://game/maze/bg_audio.tres" type="AudioStream" id=9]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
 extents = Vector2( 50, 35 )
 
-[node name="Maze" type="Node2D"]
+[node name="Maze" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 
@@ -28,8 +29,6 @@ _sections_unfolded = [ "Animation", "Offset", "Region" ]
 
 [node name="walls" parent="." index="2" instance=ExtResource( 4 )]
 
-_sections_unfolded = [ "Collision" ]
-
 [node name="GUI" parent="." index="3" instance=ExtResource( 5 )]
 
 [node name="web" type="Area2D" parent="." index="4"]
@@ -39,9 +38,11 @@ gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
+collision_mask = 0
 audio_bus_override = false
 audio_bus_name = "Master"
 script = ExtResource( 6 )
+_sections_unfolded = [ "Collision" ]
 __meta__ = {
 "_edit_lock_": true
 }
@@ -57,11 +58,12 @@ position = Vector2( 276, 188 )
 
 [node name="Player" parent="." index="6" instance=ExtResource( 8 )]
 
-_sections_unfolded = [ "Collision" ]
+position = Vector2( 500, 500 )
+_sections_unfolded = [ "Collision", "Transform" ]
 
 [node name="audio" type="AudioStreamPlayer" parent="." index="7"]
 
-stream = null
+stream = ExtResource( 9 )
 volume_db = 0.0
 autoplay = false
 mix_target = 0

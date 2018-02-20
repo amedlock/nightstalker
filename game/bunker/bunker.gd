@@ -4,8 +4,11 @@ extends Node
 # need to cut this up for destructible bunkers ( black robot v2 )
 
 func _ready():
-	pass
+	get_node("bunker_body").add_to_group("walls")
 
+
+func _hit(other):
+	pass
 
 	
 func hit_section( proj, block ):

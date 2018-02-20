@@ -47,7 +47,7 @@ points = 300
 speed = 25
 large_bullet = false
 special_ammo = false
-fire_delay = 0.3
+fire_delay = 0.65
 
 [node name="image" type="Sprite" parent="." index="0"]
 

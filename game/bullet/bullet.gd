@@ -11,8 +11,7 @@ export var absorbs_bullets = false
 
 func _ready():
 	self.add_to_group("bullets")
-	connect("area_entered", self, "_hit")
-	connect("body_entered", self, "_hit")
+	connect("body_entered", self, "_hit") # for walls
 		
 func _process(delta):
 	self.translate( dir * self.speed )

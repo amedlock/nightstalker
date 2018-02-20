@@ -17,8 +17,10 @@ _sections_unfolded = [ "Collision" ]
 
 [node name="wall_sprite" type="Sprite" parent="." index="0"]
 
+z_index = 2
 texture = ExtResource( 2 )
 centered = false
+_sections_unfolded = [ "Z Index" ]
 __meta__ = {
 "_edit_lock_": true
 }

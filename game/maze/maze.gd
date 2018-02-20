@@ -49,20 +49,22 @@ func restart():
 
 func start_game():
 	score = 0	
-	$GUI.get_node("score").set_text( str(score) )	
 	player.lives = 6
 	player.reset()
-	$GUI.get_node("lives").set_text( str(player.lives) )
-	$GUI.get_node("banner").set_text("")
-	spawn_bat(0)
-	spawn_bat(1)
+	update_ui()
+	spawn_bat()
+	spawn_bat()
 	spawn_spider()
 	spawn_robot()
+
+func update_ui():
+	$GUI.get_node("score").text = "Score:" + str(score) ;
+	$GUI.get_node("lives").text =  "Lives:" + str(player.lives) 
 
 
 func add_points( n ):
 	score += n
-	$GUI.get_node("score").set_text( str( score ))
+	update_ui()
 
 
 
@@ -71,12 +73,11 @@ func spawn_spider():
 	sp.position = spider_start 
 	self.add_child(sp)
 
-func spawn_bat(n):
+func spawn_bat():
 	if score < 5000:
 		var b = bat.instance()
 		self.add_child(b)
-		b.position = bat_start[n%2] 
-		b.index = n
+		b.position = bat_start[randi()%2] 
 		return b
 	else:
 		return spawn_secondary()

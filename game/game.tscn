@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://game/game.gd" type="Script" id=1]
 [ext_resource path="res://game/title.png" type="Texture" id=2]
-[ext_resource path="res://sound/BGSound.tres" type="AudioStream" id=3]
-[ext_resource path="res://game/maze/Maze.tscn" type="PackedScene" id=4]
+[ext_resource path="res://game/audio.gd" type="Script" id=3]
+[ext_resource path="res://sound/BGSound.wav" type="AudioStream" id=4]
+[ext_resource path="res://game/maze/Maze.tscn" type="PackedScene" id=5]
 
 [node name="Game" type="Node2D"]
 
@@ -21,14 +22,23 @@ scale = Vector2( 1.99375, 2.38781 )
 texture = ExtResource( 2 )
 centered = false
 
-[node name="audio" type="AudioStreamPlayer" parent="." index="1"]
+[node name="BG" type="Timer" parent="." index="1"]
 
-stream = ExtResource( 3 )
-volume_db = -4.0
+process_mode = 1
+wait_time = 1.5
+one_shot = false
+autostart = false
+script = ExtResource( 3 )
+
+[node name="audio" type="AudioStreamPlayer" parent="BG" index="0"]
+
+stream = ExtResource( 4 )
+volume_db = -2.0
 autoplay = false
 mix_target = 0
 bus = "Master"
+_sections_unfolded = [ "Pause" ]
 
-[node name="maze" parent="." index="2" instance=ExtResource( 4 )]
+[node name="maze" parent="." index="2" instance=ExtResource( 5 )]
 
 

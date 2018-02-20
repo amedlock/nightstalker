@@ -64,7 +64,7 @@ points = 300
 speed = 25
 large_bullet = false
 special_ammo = false
-fire_delay = 0.3
+fire_delay = 0.6
 
 [node name="image" type="Sprite" parent="." index="0"]
 
@@ -92,7 +92,7 @@ shape = SubResource( 2 )
 [node name="shield" type="Sprite" parent="." index="2"]
 
 visible = false
-modulate = Color( 1, 1, 1, 0.502784 )
+modulate = Color( 1, 0.984375, 0, 0.729255 )
 position = Vector2( -0.247948, 0.527009 )
 scale = Vector2( 1.55701, 1.8765 )
 texture = ExtResource( 3 )
