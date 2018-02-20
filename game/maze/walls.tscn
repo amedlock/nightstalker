@@ -3,20 +3,17 @@
 [ext_resource path="res://game/maze/walls.gd" type="Script" id=1]
 [ext_resource path="res://game/maze/walls.png" type="Texture" id=2]
 
-[node name="walls" type="Area2D" index="0"]
+[node name="walls" type="StaticBody2D"]
 
 input_pickable = true
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
-audio_bus_override = false
-audio_bus_name = "Master"
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
 script = ExtResource( 1 )
-__meta__ = {
-"_edit_group_": true,
-"_edit_lock_": true
-}
+_sections_unfolded = [ "Collision" ]
 
 [node name="wall_sprite" type="Sprite" parent="." index="0"]
 

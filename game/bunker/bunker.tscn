@@ -1,24 +1,35 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://game/bunker/bunker.gd" type="Script" id=1]
-[ext_resource path="res://game/bunker/bunker.png" type="Texture" id=2]
+[ext_resource path="res://game/bunker/bunker_space.gd" type="Script" id=2]
+[ext_resource path="res://game/bunker/bunker.png" type="Texture" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 10, 10 )
+extents = Vector2( 25.5292, 17.2111 )
 
-[node name="bunker" type="Node2D"]
+[sub_resource type="RectangleShape2D" id=2]
 
-visible = false
-z_index = 2
+custom_solver_bias = 0.0
+extents = Vector2( 25.503, 16.58 )
+
+[sub_resource type="RectangleShape2D" id=3]
+
+custom_solver_bias = 0.0
+extents = Vector2( 25.8525, 15.9035 )
+
+[sub_resource type="RectangleShape2D" id=4]
+
+custom_solver_bias = 0.0
+extents = Vector2( 24.8908, 16.3615 )
+
+[node name="Bunker" type="Node2D"]
+
 script = ExtResource( 1 )
-_sections_unfolded = [ "Z Index" ]
-__meta__ = {
-"_edit_lock_": true
-}
+_sections_unfolded = [ "Transform" ]
 
-[node name="bunker_space" type="Area2D" parent="." index="0"]
+[node name="UpperLeft" type="Area2D" parent="." index="0"]
 
 editor/display_folded = true
 input_pickable = true
@@ -26,110 +37,119 @@ gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
+collision_mask = 3
 audio_bus_override = false
 audio_bus_name = "Master"
-__meta__ = {
-"_edit_group_": true,
-"_edit_lock_": true
-}
+script = ExtResource( 2 )
+_sections_unfolded = [ "Collision", "Transform" ]
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="bunker_space" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UpperLeft" index="0"]
+
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="UpperLeft" index="1"]
+
+z_index = 2
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 51, 34 )
+_sections_unfolded = [ "Region", "Z Index" ]
+
+[node name="UpperRight" type="Area2D" parent="." index="1"]
+
+editor/display_folded = true
+position = Vector2( 50.9968, 0 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UpperRight" index="0"]
+
+position = Vector2( 0, 0.315559 )
+shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="UpperRight" index="1"]
+
+z_index = 2
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 51, 0, 51, 34 )
+_sections_unfolded = [ "Region", "Z Index" ]
+
+[node name="LowerLeft" type="Area2D" parent="." index="2"]
+
+editor/display_folded = true
+position = Vector2( 7.62939e-06, 32.9306 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LowerLeft" index="0"]
+
+shape = SubResource( 3 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Sprite" type="Sprite" parent="LowerLeft" index="1"]
+
+position = Vector2( 0, 0.790565 )
+z_index = 2
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 0, 34, 51, 34 )
+_sections_unfolded = [ "Region", "Z Index" ]
+
+[node name="LowerLeft2" type="Area2D" parent="." index="3"]
+
+editor/display_folded = true
+position = Vector2( 50.9778, 33.073 )
+input_pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+audio_bus_override = false
+audio_bus_name = "Master"
+script = ExtResource( 2 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LowerLeft2" index="0"]
+
+position = Vector2( 0, 0.315559 )
+shape = SubResource( 4 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Sprite" type="Sprite" parent="LowerLeft2" index="1"]
+
+position = Vector2( 0, 0.790565 )
+z_index = 2
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 51, 34, 51, 34 )
+_sections_unfolded = [ "Region", "Z Index" ]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." index="4"]
+
+input_pickable = false
+collision_layer = 1
+collision_mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+_sections_unfolded = [ "Collision" ]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" index="0"]
 
 build_mode = 0
-polygon = PoolVector2Array( -10, -10, -3.33334, -10, -3.33334, 5, 3.33333, 5, 3.33333, -10, 10, -10, 10, 10, -10, 10 )
-
-[node name="bunkerUR" type="Area2D" parent="." index="1"]
-
-editor/display_folded = true
-input_pickable = true
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
-audio_bus_override = false
-audio_bus_name = "Master"
-
-[node name="Sprite2" type="Sprite" parent="bunkerUR" index="0"]
-
-texture = ExtResource( 2 )
-region_rect = Rect2( 51, 0, 51, 34 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="bunkerUR" index="1"]
-
-shape = SubResource( 1 )
-
-[node name="bunkerUL" type="Area2D" parent="." index="2"]
-
-editor/display_folded = true
-input_pickable = true
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
-audio_bus_override = false
-audio_bus_name = "Master"
-
-[node name="Sprite2" type="Sprite" parent="bunkerUL" index="0"]
-
-texture = ExtResource( 2 )
-region_rect = Rect2( 0, 0, 51, 34 )
-_sections_unfolded = [ "Region" ]
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="bunkerUL" index="1"]
-
-shape = SubResource( 1 )
-
-[node name="bunkerLL" type="Area2D" parent="." index="3"]
-
-editor/display_folded = true
-input_pickable = true
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
-audio_bus_override = false
-audio_bus_name = "Master"
-
-[node name="Sprite2" type="Sprite" parent="bunkerLL" index="0"]
-
-texture = ExtResource( 2 )
-region_rect = Rect2( 0, 34, 51, 34 )
-_sections_unfolded = [ "Region" ]
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="bunkerLL" index="1"]
-
-shape = SubResource( 1 )
-
-[node name="bunkerLR" type="Area2D" parent="." index="4"]
-
-editor/display_folded = true
-input_pickable = true
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
-audio_bus_override = false
-audio_bus_name = "Master"
-
-[node name="Sprite2" type="Sprite" parent="bunkerLR" index="0"]
-
-texture = ExtResource( 2 )
-region_rect = Rect2( 51, 34, 51, 34 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="bunkerLR" index="1"]
-
-shape = SubResource( 1 )
+polygon = PoolVector2Array( -24.2699, -15.6603, 10.2108, -15.6603, 10.0171, 28.6997, 38.6864, 28.506, 38.8801, -15.2728, 74.5231, -15.0791, 74.3294, 47.6835, -24.2699, 47.8772 )
 
 

@@ -144,7 +144,7 @@ func _finish(anim_name, ex):
 
 
 func fire_at_player(delta):
-	if not maze.player:
+	if maze.player==null or maze.player.state!="ok" :
 		return
 	if fire_timer>0:
 		fire_timer =max( fire_timer- delta, 0)		

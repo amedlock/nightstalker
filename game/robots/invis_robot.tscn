@@ -25,15 +25,16 @@ tracks/0/keys = {
 [sub_resource type="RectangleShape2D" id=2]
 
 custom_solver_bias = 0.0
-extents = Vector2( 10, 10 )
+extents = Vector2( 11.5392, 15 )
 
 [sub_resource type="Animation" id=3]
 
+resource_name = "blink"
 length = 1.0
 loop = true
 step = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath(".:visibility/visible")
+tracks/0/path = NodePath(".:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -45,30 +46,34 @@ tracks/0/keys = {
 "values": [ true, false, true ]
 }
 
-[node name="black_robot" type="Area2D"]
+[node name="invis_robot" type="Area2D"]
 
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
+collision_mask = 3
 audio_bus_override = false
 audio_bus_name = "Master"
 script = ExtResource( 1 )
-health = 1
+_sections_unfolded = [ "Collision" ]
+health = 4
 explosion_color = Color( 1, 1, 1, 1 )
 points = 300
 speed = 25
-large_bullet = false
-special_ammo = false
+large_bullet = true
+special_ammo = true
 fire_delay = 0.3
 
 [node name="image" type="Sprite" parent="." index="0"]
 
+z_index = 1
 texture = ExtResource( 2 )
 hframes = 4
 frame = 1
 region_rect = Rect2( 109, 0, 88, 18 )
+_sections_unfolded = [ "Z Index" ]
 
 [node name="anim" type="AnimationPlayer" parent="image" index="0"]
 
@@ -86,7 +91,11 @@ shape = SubResource( 2 )
 
 [node name="shield" type="Sprite" parent="." index="2"]
 
+visible = false
+position = Vector2( 4.76837e-07, 0 )
+scale = Vector2( 1.25, 1.5 )
 texture = ExtResource( 3 )
+_sections_unfolded = [ "Transform", "Visibility" ]
 
 [node name="anim" type="AnimationPlayer" parent="shield" index="0"]
 

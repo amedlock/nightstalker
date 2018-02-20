@@ -1,19 +1,20 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://game/maze/maze.gd" type="Script" id=1]
 [ext_resource path="res://game/maze/walls_bg.png" type="Texture" id=2]
 [ext_resource path="res://game/maze/waypoints.tscn" type="PackedScene" id=3]
 [ext_resource path="res://game/maze/walls.tscn" type="PackedScene" id=4]
 [ext_resource path="res://game/maze/GUI.tscn" type="PackedScene" id=5]
-[ext_resource path="res://game/maze/bunker.tscn" type="PackedScene" id=6]
-[ext_resource path="res://game/human/human.tscn" type="PackedScene" id=7]
+[ext_resource path="res://game/spider/web.gd" type="Script" id=6]
+[ext_resource path="res://game/bunker/bunker.tscn" type="PackedScene" id=7]
+[ext_resource path="res://game/human/human.tscn" type="PackedScene" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 50, 30 )
+extents = Vector2( 50, 35 )
 
-[node name="Maze" type="Node2D" index="0"]
+[node name="Maze" type="Node2D"]
 
 script = ExtResource( 1 )
 
@@ -27,6 +28,8 @@ _sections_unfolded = [ "Animation", "Offset", "Region" ]
 
 [node name="walls" parent="." index="2" instance=ExtResource( 4 )]
 
+_sections_unfolded = [ "Collision" ]
+
 [node name="GUI" parent="." index="3" instance=ExtResource( 5 )]
 
 [node name="web" type="Area2D" parent="." index="4"]
@@ -38,20 +41,23 @@ linear_damp = 0.1
 angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
+script = ExtResource( 6 )
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="web_collision" type="CollisionShape2D" parent="web" index="0"]
 
-position = Vector2( 305, 210 )
+position = Vector2( 85, 100 )
 shape = SubResource( 1 )
 
-[node name="bunker" parent="." index="5" instance=ExtResource( 6 )]
+[node name="bunker" parent="." index="5" instance=ExtResource( 7 )]
 
-position = Vector2( 305, 210 )
+position = Vector2( 276, 188 )
 
-[node name="Player" parent="." index="6" instance=ExtResource( 7 )]
+[node name="Player" parent="." index="6" instance=ExtResource( 8 )]
+
+_sections_unfolded = [ "Collision" ]
 
 [node name="audio" type="AudioStreamPlayer" parent="." index="7"]
 

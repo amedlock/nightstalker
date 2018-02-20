@@ -20,22 +20,26 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 1, 0 ]
 }
 
-[node name="explosion1" type="Node2D" index="0"]
+[node name="explosion1" type="Node2D"]
 
 [node name="image" type="Sprite" parent="." index="0"]
 
+z_index = 1
+z_as_relative = false
 texture = ExtResource( 1 )
 hframes = 3
-frame = 2
+frame = 1
+_sections_unfolded = [ "Z Index" ]
 
 [node name="anim" type="AnimationPlayer" parent="image" index="0"]
 
 root_node = NodePath("..")
-autoplay = ""
+autoplay = "explosion"
 playback_process_mode = 1
 playback_default_blend_time = 0.0
 playback_speed = 1.0
 anims/explosion = SubResource( 1 )
 blend_times = [  ]
+_sections_unfolded = [ "Pause", "Playback Options" ]
 
 

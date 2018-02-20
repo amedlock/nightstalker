@@ -10,11 +10,12 @@ radius = 7.0
 
 [sub_resource type="Animation" id=2]
 
+resource_name = "pulsate"
 length = 1.0
-loop = true
+loop = false
 step = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("image:transform/scale")
+tracks/0/path = NodePath("image:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -23,10 +24,10 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.5, 1 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Vector2( 1.15, 1.15 ), Vector2( 0.75, 0.75 ), Vector2( 1.2, 1.2 ) ]
+"values": [ Vector2( 1, 1 ), Vector2( 1.25, 1.25 ), Vector2( 1, 1 ) ]
 }
 tracks/1/type = "value"
-tracks/1/path = NodePath("image:transform/rot")
+tracks/1/path = NodePath("image:rotation_degrees")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/imported = false
@@ -46,6 +47,7 @@ gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
 collision_layer = 2
+collision_mask = 3
 audio_bus_override = false
 audio_bus_name = "Master"
 script = ExtResource( 1 )
@@ -53,13 +55,15 @@ _sections_unfolded = [ "Collision" ]
 dir = Vector2( -1, 0 )
 speed = 2.2
 special = false
-absorbs_bullets = false
+absorbs_bullets = true
 
 [node name="image" type="Sprite" parent="." index="0"]
 
+rotation = 1.5708
 texture = ExtResource( 2 )
 hframes = 2
 region_rect = Rect2( 22, 4, 7, 7 )
+_sections_unfolded = [ "Transform" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 

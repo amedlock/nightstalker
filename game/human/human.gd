@@ -1,4 +1,4 @@
-extends Area2D
+extends KinematicBody2D
 
 var bullets = 0;
 var lives ;
@@ -19,8 +19,8 @@ var audio
 
 var waypoints 	# reference to the waypoint node list
 
-var is_stunned = false
-var is_dead = false
+var state = "ok" ; # dead, stun, ok
+
 var delay ; # delay between states
 
 # cur_wp is the last waypoint the player was at
@@ -54,31 +54,42 @@ func _ready():
 	anim.play("stand")
 
 
+
+var move_dir = { "stand": Vector2(0,0), "move_left":Vector2(-1,0), "move_up":Vector2(0,-1),
+		"move_right":Vector2(1,0), "move_down":Vector2(0,1) }
+		
+func check_dir():
+	if move_dir.has( user_move ):
+		return move_dir[user_move]
+	else:
+		return Vector2(0,0)
+
+
 # move the player, manage animations
 func _process(delta):
 	if cur_wp==null: # no waypoint? snap to one
 		set_waypoint( waypoints.find_closest( position ) )
 		return
-	if is_stunned:
+	if state=="stun":
 		self.stun_process( delta )
-	elif is_dead:
+	elif state=="dead":
 		self.dead_process( delta )
 	else:
-		if user_move=="": return
-		set_anim()
-		if blocked==true and last_pos!=null:
-			position =  last_pos 
-		last_pos = position
-		var vel = check_dir()  * delta * speed
-		last_vel = vel
-		translate( vel )
-		return		
+		if move_dir.has( user_move ): 
+			var md = move_dir[user_move]
+			var d = move_and_slide( md * speed )
+			set_anim()
 
 func backup():
 	translate( -last_vel )
 
 
 func reset():
+	if self.lives <1: 
+		self.state = "dead"
+		self.hide()
+	self.state = "ok"
+	anim.play("stand")
 	self.bullets = 0
 	self.position = Start_Position
 	spawn_gun()
@@ -96,7 +107,7 @@ func spawn_gun():
 
 # check player movement and firing
 func _input(event):
-	if is_dead or is_stunned:
+	if state!="ok":
 		user_move = ""
 		return
 	user_move = check_movement(event)
@@ -133,14 +144,6 @@ func constrain( v ):
 	return v
 
 
-var move_dir = { "stand": Vector2(0,0), "move_left":Vector2(-1,0), "move_up":Vector2(0,-1),
-		"move_right":Vector2(1,0), "move_down":Vector2(0,1) }
-		
-func check_dir():
-	if move_dir.has( user_move ):
-		return move_dir[user_move]
-	else:
-		return Vector2(0,0)
 
 
 var anim_lookup = { 
@@ -151,7 +154,7 @@ var anim_lookup = {
 }
 
 func set_anim():
-	var cur = anim.get_current_animation()
+	var cur = anim.current_animation
 	var target = "stand"
 	image1.set_flip_h( user_move=='move_left' )
 	if anim_lookup.has( user_move ):
@@ -177,7 +180,7 @@ func fire( xd, yd ):
 	if bullets > 0 and ready_to_fire:
 		bullets -= 1
 		var b = bullet.instance()
-		b.special = true
+		b.special = false
 		b.source="player"
 		b.dir = Vector2( xd, yd )
 		b.position = ( self.position )
@@ -193,30 +196,30 @@ func clear_bullet():
 	if bullets<1: spawn_gun()
 	
 func stun():
-	if is_dead: return
+	if state=="dead": return
 	anim.play("stun")
 	delay = 3
-	is_stunned = true
+	state = "stun"
 
 func stun_process(delta):
 	delay -= delta
 	if delay <=0:
-		is_stunned = false
-		image1.show()
 		anim.play("stand")
+		reset()
+		
 	
 func kill():
+	state = "dead"
 	anim.play("death")
 	audio.stream = load("res://sound/death1.wav")
-	audio.play()
-	is_dead = true
+	audio.play()	
 	delay = 3
 	bullets = 0 
 		
 func dead_process(delta):
 	delay -= delta
 	if delay <=0:
-		self.queue_free() # player will respawn automatically
+		self.reset()
 		
 
 

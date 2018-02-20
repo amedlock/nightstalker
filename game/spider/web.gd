@@ -9,8 +9,6 @@ func _ready():
 	pass
 
 
-
-
-func _collide( other ):
+func _hit( other ):
 	if other.is_in_group("bullets"):
 		other.queue_free()

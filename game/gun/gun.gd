@@ -9,7 +9,7 @@ var player
 func _ready():
 	maze = get_parent()
 	player = maze.get_node("Player")
-	connect("area_entered", self, "_collide" )
+	#connect("body_entered", self, "_collide")
 	
 func _process(delta):	
 	blink_count += delta
@@ -21,8 +21,9 @@ func _process(delta):
 			self.show()
 
 
-func _collide( area ):
-	if area.is_in_group("player") and not (area.is_dead or area.is_stunned):
+func _collide( p ):
+	if p.is_in_group("player") and p.state=="ok":
 		self.queue_free()
 		player.bullets += 6
-		#maze.pickup audio
+		maze.audio.stream = load("res://sound/pickup.wav")
+		maze.audio.play()

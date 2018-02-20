@@ -82,23 +82,20 @@ tracks/0/keys = {
 [sub_resource type="RectangleShape2D" id=3]
 
 custom_solver_bias = 0.0
-extents = Vector2( 4.52591, 12.4902 )
+extents = Vector2( 6.14598, 12.4902 )
 
-[node name="human" type="Area2D" index="0"]
+[node name="human" type="KinematicBody2D"]
 
 input_pickable = true
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
-audio_bus_override = false
-audio_bus_name = "Master"
+collision_layer = 1
+collision_mask = 7
+collision/safe_margin = 0.08
 script = ExtResource( 1 )
+_sections_unfolded = [ "Collision" ]
 
 [node name="image" type="Sprite" parent="." index="0"]
 
 position = Vector2( 0.555542, 0.347214 )
-z_index = 1
 texture = ExtResource( 2 )
 hframes = 9
 frame = 2

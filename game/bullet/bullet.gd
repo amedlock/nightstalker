@@ -11,7 +11,8 @@ export var absorbs_bullets = false
 
 func _ready():
 	self.add_to_group("bullets")
-	self.connect("area_entered", self, "_collide")
+	connect("area_entered", self, "_hit")
+	connect("body_entered", self, "_hit")
 		
 func _process(delta):
 	self.translate( dir * self.speed )
@@ -28,7 +29,7 @@ func get_sound():
 		return load('res://sound/fire.wav')
 
 
-func _collide(other):
+func _hit(other):
 	if other.is_in_group("walls"):
 		self.queue_free()
 	elif absorbs_bullets and other.is_in_group("bullets"):

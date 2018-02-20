@@ -59,5 +59,6 @@ playback_default_blend_time = 0.0
 playback_speed = 1.0
 anims/movement = SubResource( 2 )
 blend_times = [  ]
+_sections_unfolded = [ "Playback Options" ]
 
 

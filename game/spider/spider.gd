@@ -3,19 +3,19 @@ extends Area2D
 export var speed = 20
 
 var expl = preload("res://game/explosion1.tscn")
-var game
 var sprite 
 
+var maze 
 var waypoints
 var last_wp = null
 var next_wp = null
 
 
 func _ready():
-	connect("area_entered", self, "_collide" )
-	game = get_tree().get_root().get_node("Game")
+	connect("area_entered", self, "_hit" )
+	maze = get_parent()
 	sprite = get_node("image")
-	waypoints = game.get_node("waypoints")
+	waypoints = maze.get_node("waypoints")
 	self.add_to_group("enemies")
 	set_process(true)
 	
@@ -54,26 +54,22 @@ func follow_path(delta):
 		choose_path()
 	
 
-func _hit(other):
-	self.queue_free()
-
 func choose_path():
 	next_wp = last_wp.choose_random()
 
 	
-	
-func _collide(other):
+func _hit(other):
 	if other.is_in_group("player"):
 		other.stun()
 	if other.is_in_group("bullets"):
 		if other.source=="player":
-			game.add_points(100)
+			maze.add_points(100)
 		self.kill()
 		
 func kill():
 	var n = expl.instance()
-	n.position = ( position + Vector2(0,1) )
-	n.connect("exit_tree", game, "spawn_spider" )
 	self.get_parent().add_child( n )
+	n.position = ( position + Vector2(0,1) )
+	n.connect("exit_tree", maze, "spawn_spider" )
 	self.queue_free()
 	
