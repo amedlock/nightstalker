@@ -1,5 +1,6 @@
 # nightstalker
 Clone of Nightstalker(tm) for the Intellivision in godot engine. 
+Now ported to 3.0, old version in branch godot2.
 
 Player character does not use node based movement, but probably should.
 
