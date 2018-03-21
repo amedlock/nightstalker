@@ -7,6 +7,8 @@ export var speed = 30
 var points = 300
 var anim
 
+var stuns_player = true
+
 
 var maze
 var waypoints
@@ -15,6 +17,7 @@ var next_wp = null
 
 
 func _ready():
+	connect("body_entered", self, "_hit" )
 	connect("area_entered", self, "_hit")
 	maze = get_parent()
 	waypoints = maze.get_node("waypoints")

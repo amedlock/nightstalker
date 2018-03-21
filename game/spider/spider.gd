@@ -10,6 +10,7 @@ var waypoints
 var last_wp = null
 var next_wp = null
 
+var stuns_player = true
 
 func _ready():
 	connect("area_entered", self, "_hit" )

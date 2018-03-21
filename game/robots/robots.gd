@@ -14,6 +14,7 @@ var bullet
 
 #var ex = null # current explosion
 
+var stuns_player = false
 
 var is_secondary = false; # if true, will call game.spawn_secondary on death
 

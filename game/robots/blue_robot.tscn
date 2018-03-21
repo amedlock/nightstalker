@@ -6,7 +6,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 10, 10 )
+extents = Vector2( 10, 16.1678 )
 
 [sub_resource type="Animation" id=2]
 
@@ -26,7 +26,7 @@ tracks/0/keys = {
 "values": [ 0, 1, 2, 3 ]
 }
 
-[node name="blue_robot" type="Area2D"]
+[node name="blue_robot" type="Area2D" index="0"]
 
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -38,9 +38,6 @@ audio_bus_override = false
 audio_bus_name = "Master"
 script = ExtResource( 1 )
 _sections_unfolded = [ "Collision" ]
-__meta__ = {
-"_edit_group_": true
-}
 health = 1
 explosion_color = Color( 0.506744, 0.577712, 0.960938, 1 )
 points = 300
@@ -54,9 +51,13 @@ fire_delay = 0.65
 texture = ExtResource( 2 )
 hframes = 4
 region_rect = Rect2( 109, 0, 88, 18 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 
+position = Vector2( -0.349648, 1.22377 )
 shape = SubResource( 1 )
 
 [node name="anim" type="AnimationPlayer" parent="." index="2"]

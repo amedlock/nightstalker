@@ -229,3 +229,6 @@ func _hit( other ):
 	if other.is_in_group("bullets") and other.source!="player":
 		self.kill()
 		other.queue_free()
+	elif state=="ok" and other.is_in_group("enemies") and other.stuns_player:
+		self.stun()
+

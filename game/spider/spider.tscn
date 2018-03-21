@@ -3,7 +3,7 @@
 [ext_resource path="res://game/spider/spider.gd" type="Script" id=1]
 [ext_resource path="res://game/spider/spider.png" type="Texture" id=2]
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=1]
 
 length = 1.2
 loop = true
@@ -26,7 +26,7 @@ tracks/0/keys = {
 custom_solver_bias = 0.0
 radius = 10.0
 
-[node name="spider" type="Area2D"]
+[node name="spider" type="Area2D" index="0"]
 
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -55,7 +55,7 @@ autoplay = "movement"
 playback_process_mode = 1
 playback_default_blend_time = 0.0
 playback_speed = 1.0
-anims/movement = SubResource( 3 )
+anims/movement = SubResource( 1 )
 blend_times = [  ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="2"]
