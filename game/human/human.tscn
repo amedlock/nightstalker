@@ -5,11 +5,9 @@
 [ext_resource path="res://game/human/human_anim.tres" type="Animation" id=3]
 
 [sub_resource type="Animation" id=1]
-
 resource_name = "death"
 length = 0.7
 loop = true
-step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:region_rect")
 tracks/0/interp = 1
@@ -24,11 +22,8 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=2]
-
 resource_name = "stand"
 length = 0.5
-loop = false
-step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:region_rect")
 tracks/0/interp = 1
@@ -43,11 +38,8 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=3]
-
 resource_name = "stun"
 length = 0.8
-loop = false
-step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:region_rect")
 tracks/0/interp = 1
@@ -62,10 +54,8 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=4]
-
 length = 1.2
 loop = true
-step = 0.1
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:region_rect")
 tracks/0/interp = 1
@@ -80,46 +70,25 @@ tracks/0/keys = {
 }
 
 [sub_resource type="RectangleShape2D" id=5]
-
-custom_solver_bias = 0.0
 extents = Vector2( 6.14598, 12.4902 )
 
 [node name="human" type="KinematicBody2D"]
-
 input_pickable = true
-collision_layer = 1
 collision_mask = 7
-collision/safe_margin = 0.08
 script = ExtResource( 1 )
-_sections_unfolded = [ "Collision" ]
 
-[node name="image" type="Sprite" parent="." index="0"]
-
-position = Vector2( 0.555542, 0.347214 )
+[node name="image" type="Sprite" parent="."]
 texture = ExtResource( 2 )
-hframes = 9
-frame = 2
+frame = 1
 region_enabled = true
 region_rect = Rect2( 0, 0, 14, 24 )
-_sections_unfolded = [ "Offset", "Region", "Z Index" ]
 
-[node name="anim" type="AnimationPlayer" parent="image" index="0"]
-
-root_node = NodePath("..")
-autoplay = ""
-playback_process_mode = 1
-playback_default_blend_time = 0.0
-playback_speed = 1.0
+[node name="anim" type="AnimationPlayer" parent="image"]
 anims/death = SubResource( 1 )
 anims/stand = SubResource( 2 )
 anims/stun = SubResource( 3 )
 anims/walk_horizontal = SubResource( 4 )
 anims/walk_vertical = ExtResource( 3 )
-blend_times = [  ]
-_sections_unfolded = [ "Playback Options" ]
 
-[node name="collision" type="CollisionShape2D" parent="." index="1"]
-
+[node name="collision" type="CollisionShape2D" parent="."]
 shape = SubResource( 5 )
-
-

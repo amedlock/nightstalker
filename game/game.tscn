@@ -7,38 +7,23 @@
 [ext_resource path="res://game/maze/Maze.tscn" type="PackedScene" id=5]
 
 [node name="Game" type="Node2D"]
-
 script = ExtResource( 1 )
 
-[node name="title" type="Node2D" parent="." index="0"]
-
-editor/display_folded = true
+[node name="title" type="Node2D" parent="."]
 visible = false
 
-[node name="image" type="Sprite" parent="title" index="0"]
-
+[node name="image" type="Sprite" parent="title"]
 position = Vector2( 1, 1.70087 )
 scale = Vector2( 1.99375, 2.38781 )
 texture = ExtResource( 2 )
 centered = false
 
-[node name="BG" type="Timer" parent="." index="1"]
-
-process_mode = 1
+[node name="BG" type="Timer" parent="."]
 wait_time = 1.5
-one_shot = false
-autostart = false
 script = ExtResource( 3 )
 
-[node name="audio" type="AudioStreamPlayer" parent="BG" index="0"]
-
+[node name="audio" type="AudioStreamPlayer" parent="BG"]
 stream = ExtResource( 4 )
 volume_db = -2.0
-autoplay = false
-mix_target = 0
-bus = "Master"
-_sections_unfolded = [ "Pause" ]
 
-[node name="maze" parent="." index="2" instance=ExtResource( 5 )]
-
-
+[node name="maze" parent="." instance=ExtResource( 5 )]

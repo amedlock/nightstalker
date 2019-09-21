@@ -105,7 +105,7 @@ func make_robot(k, pts):
 		
 func spawn_secondary():
 	if score<5000:
-		return spawn_bat( randi() % 2 )
+		return spawn_bat()
 	else:
 		var g =make_robot(grey, 300)
 		g.is_secondary = true
