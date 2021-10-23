@@ -19,7 +19,7 @@ texture = ExtResource( 2 )
 centered = false
 
 [node name="BG" type="Timer" parent="."]
-wait_time = 1.5
+wait_time = 1.3
 script = ExtResource( 3 )
 
 [node name="audio" type="AudioStreamPlayer" parent="BG"]

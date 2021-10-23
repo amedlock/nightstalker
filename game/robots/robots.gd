@@ -4,7 +4,7 @@ extends Area2D
 export var health = 1
 export var explosion_color = Color(1,1,1)
 export var points = 300
-export var speed = 25
+export var speed = 30
 export var large_bullet = false
 export var special_ammo = false
 export var fire_delay = 0.3;

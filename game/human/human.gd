@@ -77,7 +77,7 @@ func _process(delta):
 	else:
 		if move_dir.has( user_move ): 
 			var md = move_dir[user_move]
-			var d = move_and_slide( md * speed )
+			var _d = move_and_slide( md * speed )
 			set_anim()
 
 func backup():
