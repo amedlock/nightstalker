@@ -3,7 +3,7 @@ extends Area2D
 
 
 func _ready():
-	self.connect("area_entered", get_parent(), "hit_section", [ self ] )
+	self.connect("area_entered", Callable(get_parent(), "hit_section").bind(self))
 
 
 

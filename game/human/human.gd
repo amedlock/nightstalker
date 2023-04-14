@@ -1,4 +1,4 @@
-extends KinematicBody2D
+extends CharacterBody2D
 
 var bullets = 0;
 var lives ;
@@ -49,7 +49,7 @@ func _ready():
 	audio = maze.get_node("audio")
 	waypoints = maze.get_node("waypoints")
 	self.add_to_group("player")
-	image1 = find_node("image")	
+	image1 = find_child("image")	
 	anim = image1.get_node("anim")
 	anim.play("stand")
 
@@ -77,8 +77,11 @@ func _process(delta):
 	else:
 		if move_dir.has( user_move ): 
 			var md = move_dir[user_move]
-			var _d = move_and_slide( md * speed )
+			set_velocity(md * speed)
+			move_and_slide()
+			var _d = velocity
 			set_anim()
+
 
 func backup():
 	translate( -last_vel )
@@ -100,7 +103,7 @@ func spawn_gun():
 		return 
 	var n = randi() % gun_spawns.size()
 	var v = gun_spawns[n]
-	var g = gun.instance()
+	var g = gun.instantiate()
 	g.position =  v 
 	maze.add_child(g)
 	return g
@@ -113,13 +116,13 @@ func _input(event):
 	user_move = check_movement(event)
 	if event is InputEventKey:
 		if event.pressed:
-			if event.scancode==KEY_KP_4:
+			if event.keycode==KEY_KP_4:
 				self.fire( -1, 0 )
-			elif event.scancode==KEY_KP_8:
+			elif event.keycode==KEY_KP_8:
 				self.fire( 0, -1 )
-			elif event.scancode==KEY_KP_6:
+			elif event.keycode==KEY_KP_6:
 				self.fire( 1, 0 )
-			elif event.scancode==KEY_KP_2:
+			elif event.keycode==KEY_KP_2:
 				self.fire( 0, 1 )
 
 
@@ -179,14 +182,14 @@ func check_movement( event ):
 func fire( xd, yd ):
 	if bullets > 0 and ready_to_fire:
 		bullets -= 1
-		var b = bullet.instance()
+		var b = bullet.instantiate()
 		b.special = false
 		b.source="player"
 		b.dir = Vector2( xd, yd )
 		b.position = ( self.position )
 		maze.add_child(b)
 		self.ready_to_fire = false
-		b.connect("tree_exited", self, "clear_bullet" )
+		b.connect("tree_exited", Callable(self, "clear_bullet"))
 		audio.stream = load("res://sound/fire.wav")
 		audio.play()
 

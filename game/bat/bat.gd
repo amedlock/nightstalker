@@ -2,7 +2,7 @@ extends Area2D
 
 var expl = preload("res://game/explosion1.tscn")
 
-export var speed = 30
+@export var speed = 30
 
 var points = 300
 var anim
@@ -17,8 +17,8 @@ var next_wp = null
 
 
 func _ready():
-	connect("body_entered", self, "_hit" )
-	connect("area_entered", self, "_hit")
+	connect("body_entered", Callable(self, "_hit"))
+	connect("area_entered", Callable(self, "_hit"))
 	maze = get_parent()
 	waypoints = maze.get_node("waypoints")
 	anim = self.get_node("anim")
@@ -62,10 +62,10 @@ func move_towards( pt, delta ):
 func kill():
 	maze.audio.stream = load("res://sound/bat_death.wav")
 	maze.audio.play()
-	var n = expl.instance()
+	var n = expl.instantiate()
 	self.get_parent().add_child( n )
 	n.position = self.position 
-	n.connect("tree_exiting", maze, "spawn_bat" )
+	n.connect("tree_exiting", Callable(maze, "spawn_bat"))
 	self.queue_free()
 	
 	

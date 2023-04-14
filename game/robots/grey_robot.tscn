@@ -1,44 +1,49 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=3 uid="uid://dmcln5soq16nd"]
 
-[ext_resource path="res://game/robots/robots.gd" type="Script" id=1]
-[ext_resource path="res://game/robots/robot_grey.png" type="Texture" id=2]
+[ext_resource type="Script" path="res://game/robots/robots.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://cokll5hfteu67" path="res://game/robots/robot_grey.png" id="2"]
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id="1"]
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id="2"]
 length = 0.6
-loop = true
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("image:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [ 0, 1, 0 ]
+"values": [0, 1, 0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xg14o"]
+_data = {
+"movement": SubResource("2")
 }
 
 [node name="grey_robot" type="Area2D"]
+texture_filter = 3
 collision_mask = 3
-script = ExtResource( 1 )
-__meta__ = {
-"_edit_group_": true
-}
-explosion_color = Color( 0.707031, 0.707031, 0.707031, 1 )
+script = ExtResource("1")
+explosion_color = Color(0.707031, 0.707031, 0.707031, 1)
 speed = 25
 fire_delay = 1.0
 
-[node name="image" type="Sprite" parent="."]
-texture = ExtResource( 2 )
+[node name="image" type="Sprite2D" parent="."]
+texture_filter = 3
+texture = ExtResource("2")
 hframes = 2
-region_rect = Rect2( 109, 0, 88, 18 )
+region_rect = Rect2(109, 0, 88, 18)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 1 )
+shape = SubResource("1")
 
 [node name="anim" type="AnimationPlayer" parent="."]
 autoplay = "movement"
-anims/movement = SubResource( 2 )
+libraries = {
+"": SubResource("AnimationLibrary_xg14o")
+}

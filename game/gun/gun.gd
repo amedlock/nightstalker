@@ -9,7 +9,7 @@ var player
 func _ready():
 	maze = get_parent()
 	player = maze.get_node("Player")
-	connect("body_entered", self, "_collide")
+	connect("body_entered", Callable(self, "_collide"))
 	
 func _process(delta):	
 	blink_count += delta

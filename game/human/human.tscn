@@ -1,93 +1,100 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=3 uid="uid://m212kq3726ga"]
 
-[ext_resource path="res://game/human/human.gd" type="Script" id=1]
-[ext_resource path="res://game/human/human.png" type="Texture" id=2]
-[ext_resource path="res://game/human/human_anim.tres" type="Animation" id=3]
+[ext_resource type="Script" path="res://game/human/human.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://bus5yatbmrotu" path="res://game/human/human.png" id="2"]
+[ext_resource type="Animation" path="res://game/human/human_anim.tres" id="3"]
 
-[sub_resource type="Animation" id=1]
+[sub_resource type="Animation" id="1"]
 resource_name = "death"
 length = 0.7
-loop = true
+loop_mode = 1
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath(".:region_rect")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3, 0.6 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [ Rect2( 91, 0, 13, 24 ), Rect2( 104, 0, 14, 24 ), Rect2( 118, 0, 14, 24 ) ]
+"values": [Rect2(91, 0, 13, 24), Rect2(104, 0, 14, 24), Rect2(118, 0, 14, 24)]
 }
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id="2"]
 resource_name = "stand"
 length = 0.5
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath(".:region_rect")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [ Rect2( 0, 0, 14, 24 ) ]
+"values": [Rect2(0, 0, 14, 24)]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id="3"]
 resource_name = "stun"
 length = 0.8
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath(".:region_rect")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.4, 0.8 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.4, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [ Rect2( 118, 0, 13, 24 ), Rect2( 134, 0, 22, 24 ), Rect2( 155, 0, 22, 24 ) ]
+"values": [Rect2(118, 0, 13, 24), Rect2(134, 0, 22, 24), Rect2(155, 0, 22, 24)]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id="4"]
 length = 1.2
-loop = true
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath(".:region_rect")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3, 0.6, 0.9 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [ Rect2( 39, 0, 13, 24 ), Rect2( 52, 0, 13, 24 ), Rect2( 65, 0, 13, 24 ), Rect2( 78, 0, 13, 24 ) ]
+"values": [Rect2(39, 0, 13, 24), Rect2(52, 0, 13, 24), Rect2(65, 0, 13, 24), Rect2(78, 0, 13, 24)]
 }
 
-[sub_resource type="RectangleShape2D" id=5]
-extents = Vector2( 6.14598, 12.4902 )
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qlg8x"]
+_data = {
+"death": SubResource("1"),
+"stand": SubResource("2"),
+"stun": SubResource("3"),
+"walk_horizontal": SubResource("4"),
+"walk_vertical": ExtResource("3")
+}
 
-[node name="human" type="KinematicBody2D"]
-input_pickable = true
+[sub_resource type="RectangleShape2D" id="5"]
+size = Vector2(6.14598, 12.4902)
+
+[node name="human" type="CharacterBody2D"]
 collision_mask = 7
-script = ExtResource( 1 )
+input_pickable = true
+script = ExtResource("1")
 
-[node name="image" type="Sprite" parent="."]
-texture = ExtResource( 2 )
+[node name="image" type="Sprite2D" parent="."]
+texture_filter = 3
+texture = ExtResource("2")
 region_enabled = true
-region_rect = Rect2( 0, 0, 14, 24 )
+region_rect = Rect2(118, 0, 14, 24)
 
 [node name="anim" type="AnimationPlayer" parent="image"]
-anims/death = SubResource( 1 )
-anims/stand = SubResource( 2 )
-anims/stun = SubResource( 3 )
-anims/walk_horizontal = SubResource( 4 )
-anims/walk_vertical = ExtResource( 3 )
+libraries = {
+"": SubResource("AnimationLibrary_qlg8x")
+}
 
 [node name="collision" type="CollisionShape2D" parent="."]
-shape = SubResource( 5 )
+shape = SubResource("5")

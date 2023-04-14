@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://game/spider/spider.gd" type="Script" id=1]
-[ext_resource path="res://game/spider/spider.png" type="Texture" id=2]
+[ext_resource path="res://game/spider/spider.png" type="Texture2D" id=2]
 
 [sub_resource type="Animation" id=1]
 
@@ -15,8 +15,8 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.4, 0.8 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PackedFloat32Array( 0, 0.4, 0.8 ),
+"transitions": PackedFloat32Array( 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2 ]
 }
@@ -29,7 +29,7 @@ radius = 10.0
 [node name="spider" type="Area2D" index="0"]
 
 input_pickable = true
-gravity_vec = Vector2( 0, 1 )
+gravity_direction = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
@@ -40,13 +40,13 @@ script = ExtResource( 1 )
 _sections_unfolded = [ "Collision" ]
 speed = 20
 
-[node name="image" type="Sprite" parent="." index="0"]
+[node name="image" type="Sprite2D" parent="." index="0"]
 
 scale = Vector2( 0.8, 0.8 )
 texture = ExtResource( 2 )
 hframes = 3
 region_rect = Rect2( 109, 0, 88, 18 )
-_sections_unfolded = [ "Offset", "Transform" ]
+_sections_unfolded = [ "Offset", "Transform3D" ]
 
 [node name="anim" type="AnimationPlayer" parent="." index="1"]
 

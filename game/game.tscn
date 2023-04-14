@@ -1,29 +1,29 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=6 format=3 uid="uid://c4fsk3smunvaw"]
 
-[ext_resource path="res://game/game.gd" type="Script" id=1]
-[ext_resource path="res://game/title.png" type="Texture" id=2]
-[ext_resource path="res://game/audio.gd" type="Script" id=3]
-[ext_resource path="res://sound/BGSound.wav" type="AudioStream" id=4]
-[ext_resource path="res://game/maze/Maze.tscn" type="PackedScene" id=5]
+[ext_resource type="Script" path="res://game/game.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://bb12iun2at286" path="res://game/title.png" id="2"]
+[ext_resource type="Script" path="res://game/audio.gd" id="3"]
+[ext_resource type="AudioStream" uid="uid://di0loa4akjmpr" path="res://sound/BGSound.wav" id="4"]
+[ext_resource type="PackedScene" path="res://game/maze/Maze.tscn" id="5"]
 
 [node name="Game" type="Node2D"]
-script = ExtResource( 1 )
+script = ExtResource("1")
 
 [node name="title" type="Node2D" parent="."]
 visible = false
 
-[node name="image" type="Sprite" parent="title"]
-position = Vector2( 1, 1.70087 )
-scale = Vector2( 1.99375, 2.38781 )
-texture = ExtResource( 2 )
+[node name="image" type="Sprite2D" parent="title"]
+position = Vector2(1, 1.70087)
+scale = Vector2(1.99375, 2.38781)
+texture = ExtResource("2")
 centered = false
 
 [node name="BG" type="Timer" parent="."]
 wait_time = 1.3
-script = ExtResource( 3 )
+script = ExtResource("3")
 
 [node name="audio" type="AudioStreamPlayer" parent="BG"]
-stream = ExtResource( 4 )
+stream = ExtResource("4")
 volume_db = -2.0
 
-[node name="maze" parent="." instance=ExtResource( 5 )]
+[node name="maze" parent="." instance=ExtResource("5")]

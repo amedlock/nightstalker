@@ -1,70 +1,83 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=3 uid="uid://cg44uky6mp356"]
 
-[ext_resource path="res://game/robots/robots.gd" type="Script" id=1]
-[ext_resource path="res://game/robots/robot_white.png" type="Texture" id=2]
-[ext_resource path="res://game/robots/shield.png" type="Texture" id=3]
+[ext_resource type="Script" path="res://game/robots/robots.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://dsf54bcvotqfh" path="res://game/robots/robot_white.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://mpgbawic8qxr" path="res://game/robots/shield.png" id="3"]
 
-[sub_resource type="Animation" id=1]
+[sub_resource type="Animation" id="1"]
 length = 1.2
-loop = true
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3, 0.6, 0.9, 1.2 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [ 0, 1, 2, 3, 0 ]
+"values": [0, 1, 2, 3, 0]
 }
 
-[sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 11.8848, 17.5909 )
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_nb7jn"]
+_data = {
+"movement": SubResource("1")
+}
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="RectangleShape2D" id="2"]
+size = Vector2(11.8848, 17.5909)
+
+[sub_resource type="Animation" id="3"]
 resource_name = "blink"
-loop = true
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath(".:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5, 1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [ true, false, true ]
+"values": [true, false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vhmjt"]
+_data = {
+"blink": SubResource("3")
 }
 
 [node name="white_robot" type="Area2D"]
+texture_filter = 3
 collision_mask = 3
-script = ExtResource( 1 )
+script = ExtResource("1")
 health = 3
 fire_delay = 0.6
 
-[node name="image" type="Sprite" parent="."]
+[node name="image" type="Sprite2D" parent="."]
 z_index = 1
-texture = ExtResource( 2 )
+texture = ExtResource("2")
 hframes = 4
 frame = 3
-region_rect = Rect2( 109, 0, 88, 18 )
+region_rect = Rect2(109, 0, 88, 18)
 
 [node name="anim" type="AnimationPlayer" parent="image"]
 autoplay = "movement"
-anims/movement = SubResource( 1 )
+libraries = {
+"": SubResource("AnimationLibrary_nb7jn")
+}
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource( 2 )
+shape = SubResource("2")
 
-[node name="shield" type="Sprite" parent="."]
+[node name="shield" type="Sprite2D" parent="."]
 visible = false
-modulate = Color( 1, 0.984375, 0, 0.729255 )
-position = Vector2( -0.247948, 0.527009 )
-scale = Vector2( 1.55701, 1.8765 )
-texture = ExtResource( 3 )
+modulate = Color(1, 0.984375, 0, 0.729255)
+position = Vector2(-0.247948, 0.527009)
+scale = Vector2(1.55701, 1.8765)
+texture = ExtResource("3")
 
 [node name="anim" type="AnimationPlayer" parent="shield"]
-anims/blink = SubResource( 3 )
+libraries = {
+"": SubResource("AnimationLibrary_vhmjt")
+}

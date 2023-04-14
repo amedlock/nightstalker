@@ -43,7 +43,7 @@ func restart():
 	var b = get_node("bunker");
 	if b: 
 		b.queue_free()
-	b = bunker.instance()
+	b = bunker.instantiate()
 	b.position = Vector2(288,208) 
 	start_game()
 
@@ -69,13 +69,13 @@ func add_points( n ):
 
 
 func spawn_spider():
-	var sp = spider.instance()
+	var sp = spider.instantiate()
 	sp.position = spider_start 
-	self.add_child(sp)
+	self.add_child.call_deferred(sp)
 
 func spawn_bat():
 	if score < 5000:
-		var b = bat.instance()
+		var b = bat.instantiate()
 		self.add_child(b)
 		b.position = bat_start[randi()%2] 
 		return b
@@ -97,7 +97,7 @@ func spawn_robot():
 		make_robot(invis, 4000)
 
 func make_robot(k, pts):
-	var g = k.instance()
+	var g = k.instantiate()
 	g.position =  robot_start 
 	g.points = pts
 	self.add_child(g)

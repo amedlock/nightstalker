@@ -1,4 +1,4 @@
-[gd_resource type="AudioStreamSample" format=2]
+[gd_resource type="AudioStreamWAV" format=2]
 
 [resource]
 
@@ -8,6 +8,6 @@ loop_begin = 0
 loop_end = 0
 mix_rate = 44100
 stereo = false
-data = PoolByteArray(  )
+data = PackedByteArray(  )
 _sections_unfolded = [ "Resource" ]
 

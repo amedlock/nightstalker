@@ -1,82 +1,62 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=3 uid="uid://65a7kpjqr3dj"]
 
-[ext_resource path="res://game/bullet/bullet.gd" type="Script" id=1]
-[ext_resource path="res://game/bullet/bullets.png" type="Texture" id=2]
+[ext_resource type="Script" path="res://game/bullet/bullet.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://b8yrdha3sirj2" path="res://game/bullet/bullet2.png" id="2_mxvyg"]
 
-[sub_resource type="CircleShape2D" id=1]
-
-custom_solver_bias = 0.0
+[sub_resource type="CircleShape2D" id="1"]
 radius = 7.0
 
-[sub_resource type="Animation" id=2]
-
+[sub_resource type="Animation" id="2"]
 resource_name = "pulsate"
-length = 1.0
-loop = false
-step = 0.1
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath("image:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5, 1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [ Vector2( 1, 1 ), Vector2( 1.25, 1.25 ), Vector2( 1, 1 ) ]
+"values": [Vector2(1, 1), Vector2(1.25, 1.25), Vector2(1, 1)]
 }
 tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
 tracks/1/path = NodePath("image:rotation_degrees")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.5, 1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [ 0.0, 45.0, 90.0 ]
+"values": [0.0, 45.0, 90.0]
 }
 
-[node name="bullet2" type="Area2D"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xr7s7"]
+_data = {
+"pulsate": SubResource("2")
+}
 
-input_pickable = true
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
+[node name="bullet2" type="Area2D" groups=["bullets"]]
+texture_filter = 3
 collision_layer = 2
 collision_mask = 3
-audio_bus_override = false
-audio_bus_name = "Master"
-script = ExtResource( 1 )
-_sections_unfolded = [ "Collision" ]
-dir = Vector2( -1, 0 )
-speed = 2.2
-special = false
+gravity = 98.0
+script = ExtResource("1")
 absorbs_bullets = true
 
-[node name="image" type="Sprite" parent="." index="0"]
-
+[node name="image" type="Sprite2D" parent="."]
+texture_filter = 3
 rotation = 1.5708
-texture = ExtResource( 2 )
-hframes = 2
-region_rect = Rect2( 22, 4, 7, 7 )
-_sections_unfolded = [ "Transform" ]
+texture = ExtResource("2_mxvyg")
+region_rect = Rect2(22, 4, 7, 7)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("1")
 
-shape = SubResource( 1 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="2"]
-
-root_node = NodePath("..")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "pulsate"
-playback_process_mode = 1
-playback_default_blend_time = 0.0
-playback_speed = 1.0
-anims/pulsate = SubResource( 2 )
-blend_times = [  ]
-
-
+libraries = {
+"": SubResource("AnimationLibrary_xr7s7")
+}

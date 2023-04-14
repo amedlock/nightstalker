@@ -19,7 +19,7 @@ var state = "title"
 
 
 func _ready():
-	OS.set_window_maximized(true)
+	get_window().mode = Window.MODE_MAXIMIZED if (true) else Window.MODE_WINDOWED
 	$maze.hide()
 	$title.show()	
 	randomize()
@@ -32,13 +32,13 @@ func _input(event):
 			$title.hide()
 			$maze.show()
 			$BG.start()
-		if event.scancode==KEY_F10:
+		if event.keycode==KEY_F10:
 			get_tree().quit()
-		elif event.scancode==KEY_DELETE and $maze.player!=null:
+		elif event.keycode==KEY_DELETE and $maze.player!=null:
 			$maze.player.kill()
-		elif event.scancode==KEY_F5: # testing cheats
+		elif event.keycode==KEY_F5: # testing cheats
 			$maze.add_points( 5000 )
-		elif event.scancode==KEY_F6: # testing cheats
+		elif event.keycode==KEY_F6: # testing cheats
 			$maze.player.bullets += 100
 
 func game_over():

@@ -2,19 +2,19 @@
 
 [ext_resource path="res://game/bunker/bunker.gd" type="Script" id=1]
 [ext_resource path="res://game/bunker/bunker_space.gd" type="Script" id=2]
-[ext_resource path="res://game/bunker/bunker.png" type="Texture" id=3]
+[ext_resource path="res://game/bunker/bunker.png" type="Texture2D" id=3]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 25.5292, 17.2111 )
+size = Vector2( 25.5292, 17.2111 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 25.503, 16.58 )
+size = Vector2( 25.503, 16.58 )
 
 [sub_resource type="RectangleShape2D" id=3]
-extents = Vector2( 25.8525, 15.9035 )
+size = Vector2( 25.8525, 15.9035 )
 
 [sub_resource type="RectangleShape2D" id=4]
-extents = Vector2( 24.8908, 16.3615 )
+size = Vector2( 24.8908, 16.3615 )
 
 [node name="Bunker" type="Node2D"]
 script = ExtResource( 1 )
@@ -26,7 +26,7 @@ script = ExtResource( 2 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="UpperLeft"]
 shape = SubResource( 1 )
 
-[node name="Sprite" type="Sprite" parent="UpperLeft"]
+[node name="Sprite2D" type="Sprite2D" parent="UpperLeft"]
 z_index = 2
 texture = ExtResource( 3 )
 region_enabled = true
@@ -40,7 +40,7 @@ script = ExtResource( 2 )
 position = Vector2( 0, 0.315559 )
 shape = SubResource( 2 )
 
-[node name="Sprite" type="Sprite" parent="UpperRight"]
+[node name="Sprite2D" type="Sprite2D" parent="UpperRight"]
 z_index = 2
 texture = ExtResource( 3 )
 region_enabled = true
@@ -53,7 +53,7 @@ script = ExtResource( 2 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LowerLeft"]
 shape = SubResource( 3 )
 
-[node name="Sprite" type="Sprite" parent="LowerLeft"]
+[node name="Sprite2D" type="Sprite2D" parent="LowerLeft"]
 position = Vector2( 0, 0.790565 )
 z_index = 2
 texture = ExtResource( 3 )
@@ -68,7 +68,7 @@ script = ExtResource( 2 )
 position = Vector2( 0, 0.315559 )
 shape = SubResource( 4 )
 
-[node name="Sprite" type="Sprite" parent="LowerLeft2"]
+[node name="Sprite2D" type="Sprite2D" parent="LowerLeft2"]
 position = Vector2( 0, 0.790565 )
 z_index = 2
 texture = ExtResource( 3 )
@@ -78,4 +78,4 @@ region_rect = Rect2( 51, 34, 51, 34 )
 [node name="bunker_body" type="StaticBody2D" parent="."]
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="bunker_body"]
-polygon = PoolVector2Array( -24.2699, -15.6603, 10.2108, -15.6603, 10.0171, 28.6997, 38.6864, 28.506, 38.8801, -15.2728, 74.5231, -15.0791, 74.3294, 47.6835, -24.2699, 47.8772 )
+polygon = PackedVector2Array( -24.2699, -15.6603, 10.2108, -15.6603, 10.0171, 28.6997, 38.6864, 28.506, 38.8801, -15.2728, 74.5231, -15.0791, 74.3294, 47.6835, -24.2699, 47.8772 )

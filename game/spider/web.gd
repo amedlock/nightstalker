@@ -1,7 +1,7 @@
 extends Node
 
 func _ready():
-	connect("area_entered", self, "_hit")
+	connect("area_entered", Callable(self, "_hit"))
 
 
 func _hit( other ):

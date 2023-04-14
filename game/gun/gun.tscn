@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://game/gun/gun.gd" type="Script" id=1]
-[ext_resource path="res://game/gun/gun.png" type="Texture" id=2]
+[ext_resource path="res://game/gun/gun.png" type="Texture2D" id=2]
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -11,7 +11,7 @@ radius = 9.81661
 [node name="gun" type="Area2D"]
 
 input_pickable = true
-gravity_vec = Vector2( 0, 1 )
+gravity_direction = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
@@ -25,12 +25,12 @@ __meta__ = {
 "_edit_group_": true
 }
 
-[node name="image" type="Sprite" parent="." index="0"]
+[node name="image" type="Sprite2D" parent="." index="0"]
 
 scale = Vector2( 0.3, 0.3 )
 texture = ExtResource( 2 )
 region_rect = Rect2( 0, 32, 102, 68 )
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Transform3D" ]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 

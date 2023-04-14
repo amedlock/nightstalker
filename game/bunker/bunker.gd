@@ -7,7 +7,7 @@ func _ready():
 	get_node("bunker_body").add_to_group("walls")
 
 
-func _hit(other):
+func _hit(_other):
 	pass
 
 	

@@ -2,18 +2,18 @@ extends Area2D
 
 
 
-export var dir = Vector2(-1,0)
-export var speed = 2.2;
-export var special = false
+@export var dir = Vector2(-1,0)
+@export var speed = 2.2;
+@export var special = false
 
 var source = "robot"
-export var absorbs_bullets = false
+@export var absorbs_bullets = false
 
 func _ready():
 	self.add_to_group("bullets")
-	connect("body_entered", self, "_hit") # for walls
+	connect("body_entered", Callable(self, "_hit")) # for walls
 		
-func _process(delta):
+func _process(_delta):
 	self.translate( dir * self.speed )
 	var p = position
 	var sz = get_viewport_rect().size

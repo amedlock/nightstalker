@@ -1,111 +1,88 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=3 uid="uid://cd8qqyjn3otra"]
 
-[ext_resource path="res://game/robots/robots.gd" type="Script" id=1]
-[ext_resource path="res://game/robots/invis_robot.png" type="Texture" id=2]
-[ext_resource path="res://game/robots/shield.png" type="Texture" id=3]
+[ext_resource type="Script" path="res://game/robots/robots.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://ds22ec5kv7h1q" path="res://game/robots/invis_robot.png" id="2"]
+[ext_resource type="Texture2D" uid="uid://mpgbawic8qxr" path="res://game/robots/shield.png" id="3"]
 
-[sub_resource type="Animation" id=1]
-
+[sub_resource type="Animation" id="1"]
 length = 1.2
-loop = true
-step = 0.1
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath(".:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.3, 0.6, 0.9, 1.2 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [ 0, 1, 2, 3, 0 ]
+"values": [0, 1, 2, 3, 0]
 }
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yx5qn"]
+_data = {
+"movement": SubResource("1")
+}
 
-custom_solver_bias = 0.0
-extents = Vector2( 11.5392, 15 )
+[sub_resource type="RectangleShape2D" id="2"]
+size = Vector2(11.5392, 15)
 
-[sub_resource type="Animation" id=3]
-
+[sub_resource type="Animation" id="3"]
 resource_name = "blink"
-length = 1.0
-loop = true
-step = 0.1
 tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
 tracks/0/path = NodePath(".:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.5, 1 ),
-"transitions": PoolRealArray( 1, 1, 1 ),
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [ true, false, true ]
+"values": [true, false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_q67fj"]
+_data = {
+"blink": SubResource("3")
 }
 
 [node name="invis_robot" type="Area2D"]
-
-input_pickable = true
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
+texture_filter = 3
 collision_mask = 3
-audio_bus_override = false
-audio_bus_name = "Master"
-script = ExtResource( 1 )
-_sections_unfolded = [ "Collision" ]
+gravity = 98.0
+script = ExtResource("1")
 health = 3
-explosion_color = Color( 0.279327, 0.304652, 0.441406, 1 )
-points = 300
+explosion_color = Color(0.279327, 0.304652, 0.441406, 1)
 speed = 25
 large_bullet = true
 special_ammo = true
 fire_delay = 0.5
 
-[node name="image" type="Sprite" parent="." index="0"]
-
+[node name="image" type="Sprite2D" parent="."]
 z_index = 1
-texture = ExtResource( 2 )
+texture = ExtResource("2")
 hframes = 4
 frame = 1
-region_rect = Rect2( 109, 0, 88, 18 )
-_sections_unfolded = [ "Z Index" ]
+region_rect = Rect2(109, 0, 88, 18)
 
-[node name="anim" type="AnimationPlayer" parent="image" index="0"]
-
-root_node = NodePath("..")
+[node name="anim" type="AnimationPlayer" parent="image"]
 autoplay = "movement"
-playback_process_mode = 1
-playback_default_blend_time = 0.0
-playback_speed = 1.0
-anims/movement = SubResource( 1 )
-blend_times = [  ]
+libraries = {
+"": SubResource("AnimationLibrary_yx5qn")
+}
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("2")
 
-shape = SubResource( 2 )
-
-[node name="shield" type="Sprite" parent="." index="2"]
-
+[node name="shield" type="Sprite2D" parent="."]
 visible = false
-modulate = Color( 1, 0.962769, 0.046875, 0.922627 )
-position = Vector2( 4.76837e-07, 0 )
-scale = Vector2( 1.25, 1.5 )
-texture = ExtResource( 3 )
-_sections_unfolded = [ "Transform", "Visibility" ]
+modulate = Color(1, 0.962769, 0.046875, 0.922627)
+position = Vector2(4.76837e-07, 0)
+scale = Vector2(1.25, 1.5)
+texture = ExtResource("3")
 
-[node name="anim" type="AnimationPlayer" parent="shield" index="0"]
-
-root_node = NodePath("..")
-autoplay = ""
-playback_process_mode = 1
-playback_default_blend_time = 0.0
-playback_speed = 1.0
-anims/blink = SubResource( 3 )
-blend_times = [  ]
-
-
+[node name="anim" type="AnimationPlayer" parent="shield"]
+libraries = {
+"": SubResource("AnimationLibrary_q67fj")
+}

@@ -1,13 +1,13 @@
 
 extends Area2D
 
-export var health = 1
-export var explosion_color = Color(1,1,1)
-export var points = 300
-export var speed = 30
-export var large_bullet = false
-export var special_ammo = false
-export var fire_delay = 0.3;
+@export var health = 1
+@export var explosion_color = Color(1,1,1)
+@export var points = 300
+@export var speed = 30
+@export var large_bullet = false
+@export var special_ammo = false
+@export var fire_delay = 0.3;
 
 var explosion = preload("res://game/robots/explosion2.tscn")
 var bullet 
@@ -36,7 +36,7 @@ var next_wp # next one to move to, these two vars can switch if we change direct
 
 
 func _ready():
-	connect("area_entered", self, "_hit")
+	connect("area_entered", Callable(self, "_hit"))
 	maze = get_parent()
 	audio = maze.get_node("audio")
 	self.add_to_group("enemies")
@@ -124,18 +124,18 @@ func destroy():
 	audio.play()
 	self.dead = true
 	maze.add_points( points )
-	var ex = explosion.instance()
-	ex.get_node("anim").playback_speed = 1.7
+	var ex = explosion.instantiate()
+	ex.get_node("anim").speed_scale = 1.7
 	ex.position =  self.position
 	self.get_parent().add_child( ex )
 	ex.get_node("gear1").set_modulate( explosion_color )
 	ex.get_node("gear2").set_modulate( explosion_color )
 	var anim = ex.get_node("anim")
 	anim.play("explosion")
-	anim.connect("animation_finished", self , "_finish", [ex] )
+	anim.connect("animation_finished", Callable(self, "_finish").bind(ex))
 	self.hide()
 
-func _finish(anim_name, ex):
+func _finish(_anim_name, ex):
 	ex.queue_free()
 	audio.stop()
 	if is_secondary:
@@ -169,7 +169,7 @@ func fire_at_player(delta):
 func fire( xd, yd ):
 	if ready_to_fire and not dead and fire_timer <= 0:
 		fire_timer = fire_delay
-		var b = bullet.instance()
+		var b = bullet.instantiate()
 		b.special = self.special_ammo
 		b.source="robot"
 		b.dir = Vector2( xd, yd )
@@ -178,7 +178,7 @@ func fire( xd, yd ):
 		self.ready_to_fire = false
 		audio.stream = b.get_sound()
 		audio.play()
-		b.connect("tree_exited", self, "clear_bullet" )
+		b.connect("tree_exited", Callable(self, "clear_bullet"))
 
 func clear_bullet():
 	self.ready_to_fire = true

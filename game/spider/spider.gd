@@ -1,6 +1,6 @@
 extends Area2D
 
-export var speed = 20
+@export var speed = 20
 
 var expl = preload("res://game/explosion1.tscn")
 var sprite 
@@ -13,8 +13,8 @@ var next_wp = null
 var stuns_player = true
 
 func _ready():
-	connect("area_entered", self, "_hit" )
-	connect("body_entered", self, "_hit" )
+	connect("area_entered", Callable(self, "_hit"))
+	connect("body_entered", Callable(self, "_hit"))
 	maze = get_parent()
 	sprite = get_node("image")
 	waypoints = maze.get_node("waypoints")
@@ -29,7 +29,7 @@ func _process(delta):
 	else:
 		follow_path(delta)	
 	
-const deg90 = deg2rad(90)
+const deg90 = deg_to_rad(90)
 
 # moves this towards a point, returns true if still moving
 func move_towards( pt, delta ):
@@ -74,9 +74,9 @@ func _hit(other):
 func kill():
 	maze.audio.stream = load("res://sound/bat_death.wav")
 	maze.audio.play()
-	var n = expl.instance()
+	var n = expl.instantiate()
 	self.get_parent().add_child( n )
 	n.position = position 
-	n.connect("tree_exiting", maze, "spawn_spider" )
+	n.connect("tree_exiting", Callable(maze, "spawn_spider"))
 	self.queue_free()
 	

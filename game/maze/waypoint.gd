@@ -3,14 +3,14 @@ extends Node2D
 
 
 # whether this path extends in 4 directions
-export var north = false
-export var east = false
-export var south = false
-export var west = false
+@export var north = false
+@export var east = false
+@export var south = false
+@export var west = false
 
 # can we spawn a gun here?
-export var gun_spawn = false;
-export var human_only = false;
+@export var gun_spawn = false;
+@export var human_only = false;
 
 const close_distance = 2 # at this distance from a waypoint we can move along its paths
 
